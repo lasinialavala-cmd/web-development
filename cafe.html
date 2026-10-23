@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aura Artisanal Bistro & Cafe | Artisanal Flavors, Unforgettable Moments</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        espressoDark: '#120D0A',
+                        espressoMedium: '#231812',
+                        goldAccent: '#D4AF37',
+                        goldHover: '#B89320',
+                        creamBg: '#FAF7F2',
+                        creamCard: '#FFFDF9',
+                        charcoalText: '#2B2623'
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts & FontAwesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #FAF7F2; color: #2B2623; }
+        .hero-bg {
+            background: linear-gradient(rgba(18, 13, 10, 0.70), rgba(18, 13, 10, 0.85)), url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #FAF7F2; }
+        ::-webkit-scrollbar-thumb { background: #D4AF37; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #B89320; }
+    </style>
+</head>
+<body class="antialiased selection:bg-goldAccent selection:text-espressoDark">
+
+    <!-- 1. NAVIGATION & HEADER -->
+    <header class="sticky top-0 z-40 bg-espressoDark/95 backdrop-blur-md border-b border-goldAccent/20 text-creamBg shadow-lg transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Brand Logo -->
+                <a href="#home" class="flex items-center gap-3 group">
+                    <div class="w-11 h-11 rounded-full border border-goldAccent flex items-center justify-center bg-espressoMedium group-hover:scale-105 transition-transform shadow-inner">
+                        <i class="fa-solid fa-utensils text-goldAccent text-lg"></i>
+                    </div>
+                    <div>
+                        <span class="font-serif text-2xl font-bold tracking-wider text-creamBg block leading-none">AURA</span>
+                        <span class="text-[10px] uppercase tracking-widest text-goldAccent font-semibold">Artisanal Bistro & Cafe</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Navigation Links -->
+                <nav class="hidden md:flex items-center gap-8 font-medium text-xs tracking-widest uppercase text-creamBg/80">
+                    <a href="#home" class="hover:text-goldAccent transition-colors">Home</a>
+                    <a href="#menu" class="hover:text-goldAccent transition-colors">Menu</a>
+                    <a href="#chefs" class="hover:text-goldAccent transition-colors">Chefs</a>
+                    <a href="#ambience" class="hover:text-goldAccent transition-colors">Ambience</a>
+                    <a href="#testimonials" class="hover:text-goldAccent transition-colors">Reviews</a>
+                    <a href="#hours-location" class="hover:text-goldAccent transition-colors">Contact</a>
+                </nav>
+
+                <!-- Book Table Direct CTA -->
+                <div class="flex items-center gap-4">
+                    <a href="#reservation" class="hidden sm:inline-block px-6 py-2.5 bg-goldAccent hover:bg-goldHover text-espressoDark font-semibold text-xs tracking-wider uppercase rounded-full shadow-md hover:shadow-lg transition-all transform hover:-translate-y-0.5">
+                        <i class="fa-regular fa-calendar-check mr-2"></i> Book a Table
+                    </a>
+
+                    <!-- Mobile Navigation Drawer Toggle -->
+                    <button id="mobile-menu-btn" onclick="toggleMobileNav()" class="md:hidden p-2 text-goldAccent hover:text-white focus:outline-none">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Drawer -->
+        <div id="mobile-nav" class="hidden md:hidden bg-espressoMedium border-b border-goldAccent/20 px-6 py-6 space-y-4">
+            <a href="#home" onclick="toggleMobileNav()" class="block text-sm font-medium tracking-wider text-creamBg hover:text-goldAccent uppercase">Home</a>
+            <a href="#menu" onclick="toggleMobileNav()" class="block text-sm font-medium tracking-wider text-creamBg hover:text-goldAccent uppercase">Menu</a>
+            <a href="#reservation" onclick="toggleMobileNav()" class="block text-sm font-medium tracking-wider text-goldAccent uppercase font-bold">Book a Table</a>
+            <a href="#chefs" onclick="toggleMobileNav()" class="block text-sm font-medium tracking-wider text-creamBg hover:text-goldAccent uppercase">Chefs</a>
+            <a href="#ambience" onclick="toggleMobileNav()" class="block text-sm font-medium tracking-wider text-creamBg hover:text-goldAccent uppercase">Ambience</a>
+            <a href="#testimonials" onclick="toggleMobileNav()" class="block text-sm font-medium tracking-wider text-creamBg hover:text-goldAccent uppercase">Reviews</a>
+            <a href="#hours-location" onclick="toggleMobileNav()" class="block text-sm font-medium tracking-wider text-creamBg hover:text-goldAccent uppercase">Contact</a>
+        </div>
+    </header>
+
+    <!-- 2. HERO SECTION -->
+    <section id="home" class="hero-bg min-h-[90vh] flex items-center justify-center text-center px-4 relative">
+        <div class="max-w-4xl mx-auto text-creamBg space-y-6 py-16">
+            <span class="inline-block px-4 py-1.5 rounded-full bg-goldAccent/20 backdrop-blur-md text-goldAccent font-semibold text-xs tracking-widest uppercase border border-goldAccent/30">
+                Culinary Excellence & Fine Dining
+            </span>
+            <h1 class="font-serif text-4xl sm:text-6xl lg:text-7xl font-normal leading-tight drop-shadow-md text-creamBg">
+                Artisanal Flavors, <span class="italic text-goldAccent">Unforgettable</span> Moments
+            </h1>
+            <p class="text-base sm:text-lg text-creamBg/80 max-w-2xl mx-auto font-light leading-relaxed">
+                Experience a symphony of organic ingredients, wood-fired gastronomy, and single-origin roast coffees crafted in an elegant atmosphere.
+            </p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-5 pt-6">
+                <a href="#menu" class="w-full sm:w-auto px-8 py-4 bg-goldAccent hover:bg-goldHover text-espressoDark font-semibold text-xs tracking-widest uppercase rounded-full shadow-lg transition-all transform hover:-translate-y-0.5">
+                    <i class="fa-solid fa-book-open mr-2"></i> View Menu
+                </a>
+                <a href="#reservation" class="w-full sm:w-auto px-8 py-4 bg-transparent hover:bg-creamBg/10 text-creamBg border border-goldAccent/60 font-semibold text-xs tracking-widest uppercase rounded-full backdrop-blur-sm transition-all">
+                    <i class="fa-regular fa-calendar-check mr-2"></i> Reserve Table
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. MENU SECTION WITH FILTERING -->
+    <section id="menu" class="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div class="text-center max-w-2xl mx-auto mb-14">
+            <span class="text-goldAccent uppercase font-semibold text-xs tracking-widest">Handcrafted Offerings</span>
+            <h2 class="font-serif text-3xl sm:text-5xl font-bold text-espressoDark mt-2">The Seasonal Menu</h2>
+            <div class="w-16 h-0.5 bg-goldAccent mx-auto mt-4"></div>
+        </div>
+
+        <!-- Filter Tabs -->
+        <div class="flex flex-wrap justify-center gap-2 sm:gap-4 mb-12">
+            <button onclick="filterMenu('all')" id="tab-all" class="menu-tab active px-6 py-2.5 rounded-full font-medium text-xs uppercase tracking-wider transition-all bg-espressoDark text-goldAccent shadow-md">All Items</button>
+            <button onclick="filterMenu('breakfast')" id="tab-breakfast" class="menu-tab px-6 py-2.5 rounded-full font-medium text-xs uppercase tracking-wider transition-all bg-creamCard border border-goldAccent/30 text-espressoDark hover:border-goldAccent">Breakfast & Brunch</button>
+            <button onclick="filterMenu('mains')" id="tab-mains" class="menu-tab px-6 py-2.5 rounded-full font-medium text-xs uppercase tracking-wider transition-all bg-creamCard border border-goldAccent/30 text-espressoDark hover:border-goldAccent">Main Courses</button>
+            <button onclick="filterMenu('specials')" id="tab-specials" class="menu-tab px-6 py-2.5 rounded-full font-medium text-xs uppercase tracking-wider transition-all bg-creamCard border border-goldAccent/30 text-espressoDark hover:border-goldAccent">Chef Specials</button>
+            <button onclick="filterMenu('coffee')" id="tab-coffee" class="menu-tab px-6 py-2.5 rounded-full font-medium text-xs uppercase tracking-wider transition-all bg-creamCard border border-goldAccent/30 text-espressoDark hover:border-goldAccent">Coffee & Desserts</button>
+            <button onclick="filterMenu('drinks')" id="tab-drinks" class="menu-tab px-6 py-2.5 rounded-full font-medium text-xs uppercase tracking-wider transition-all bg-creamCard border border-goldAccent/30 text-espressoDark hover:border-goldAccent">Wine & Drinks</button>
+        </div>
+
+        <!-- Menu Grid -->
+        <div id="menu-grid" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Dynamically populated -->
+        </div>
+    </section>
+
+    <!-- 4. ONLINE TABLE RESERVATION FORM -->
+    <section id="reservation" class="py-24 bg-espressoDark text-creamBg relative overflow-hidden">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-12">
+                <span class="text-goldAccent uppercase font-semibold text-xs tracking-widest">Join Us For An Experience</span>
+                <h2 class="font-serif text-3xl sm:text-5xl font-bold text-creamBg mt-2">Reserve Your Table</h2>
+                <p class="text-creamBg/70 text-sm mt-3 max-w-lg mx-auto">Book your dining experience in advance. For parties larger than 8, please contact us directly.</p>
+                <div class="w-16 h-0.5 bg-goldAccent mx-auto mt-4"></div>
+            </div>
+
+            <form id="reservation-form" onsubmit="handleReservationSubmit(event)" class="bg-espressoMedium p-8 sm:p-12 rounded-3xl border border-goldAccent/30 shadow-2xl space-y-6">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider text-goldAccent font-semibold mb-2">Full Name</label>
+                        <input type="text" required id="res-name" placeholder="e.g. Eleanor Vance" class="w-full px-4 py-3.5 rounded-xl bg-espressoDark border border-goldAccent/30 text-creamBg focus:ring-1 focus:ring-goldAccent focus:border-goldAccent text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider text-goldAccent font-semibold mb-2">Email Address</label>
+                        <input type="email" required id="res-email" placeholder="e.g. eleanor@example.com" class="w-full px-4 py-3.5 rounded-xl bg-espressoDark border border-goldAccent/30 text-creamBg focus:ring-1 focus:ring-goldAccent focus:border-goldAccent text-sm">
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider text-goldAccent font-semibold mb-2">Date</label>
+                        <input type="date" required id="res-date" class="w-full px-4 py-3.5 rounded-xl bg-espressoDark border border-goldAccent/30 text-creamBg focus:ring-1 focus:ring-goldAccent focus:border-goldAccent text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider text-goldAccent font-semibold mb-2">Time Slot</label>
+                        <select id="res-time" required class="w-full px-4 py-3.5 rounded-xl bg-espressoDark border border-goldAccent/30 text-creamBg focus:ring-1 focus:ring-goldAccent focus:border-goldAccent text-sm">
+                            <option value="12:00 PM">12:00 PM (Lunch)</option>
+                            <option value="01:30 PM">01:30 PM (Lunch)</option>
+                            <option value="06:00 PM">06:00 PM (Dinner)</option>
+                            <option value="07:30 PM" selected>07:30 PM (Dinner)</option>
+                            <option value="09:00 PM">09:00 PM (Dinner)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider text-goldAccent font-semibold mb-2">Guests</label>
+                        <select id="res-guests" required class="w-full px-4 py-3.5 rounded-xl bg-espressoDark border border-goldAccent/30 text-creamBg focus:ring-1 focus:ring-goldAccent focus:border-goldAccent text-sm">
+                            <option value="1 Guest">1 Person</option>
+                            <option value="2 Guests" selected>2 Persons</option>
+                            <option value="4 Guests">4 Persons</option>
+                            <option value="6 Guests">6 Persons</option>
+                            <option value="8 Guests">8 Persons</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider text-goldAccent font-semibold mb-2">Seating Preference</label>
+                        <select id="res-seating" class="w-full px-4 py-3.5 rounded-xl bg-espressoDark border border-goldAccent/30 text-creamBg focus:ring-1 focus:ring-goldAccent focus:border-goldAccent text-sm">
+                            <option value="Indoor Main Dining">Indoor Main Dining Room</option>
+                            <option value="Outdoor Garden Terrace">Outdoor Garden Terrace</option>
+                            <option value="Chef's Counter">Chef's Kitchen Counter</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider text-goldAccent font-semibold mb-2">Special Occasion / Notes</label>
+                        <input type="text" id="res-notes" placeholder="e.g. Birthday Anniversary, High Chair" class="w-full px-4 py-3.5 rounded-xl bg-espressoDark border border-goldAccent/30 text-creamBg focus:ring-1 focus:ring-goldAccent focus:border-goldAccent text-sm">
+                    </div>
+                </div>
+
+                <button type="submit" class="w-full py-4 bg-goldAccent hover:bg-goldHover text-espressoDark font-semibold text-xs tracking-widest uppercase rounded-xl shadow-lg transition-all mt-4">
+                    Confirm Reservation Request
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- 5. CHEF PROFILES -->
+    <section id="chefs" class="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div class="text-center max-w-2xl mx-auto mb-16">
+            <span class="text-goldAccent uppercase font-semibold text-xs tracking-widest">Mastery Behind The Cuisine</span>
+            <h2 class="font-serif text-3xl sm:text-5xl font-bold text-espressoDark mt-2">Meet Our Culinary Artists</h2>
+            <div class="w-16 h-0.5 bg-goldAccent mx-auto mt-4"></div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+            <!-- Chef 1 -->
+            <div class="bg-creamCard rounded-3xl overflow-hidden border border-goldAccent/20 shadow-md flex flex-col sm:flex-row">
+                <div class="sm:w-1/2 h-80 sm:h-auto overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1577219491135-ce391730fb2c?auto=format&fit=crop&w=600&q=80" alt="Executive Chef Mateo Rossi" class="w-full h-full object-cover">
+                </div>
+                <div class="sm:w-1/2 p-8 flex flex-col justify-between space-y-4">
+                    <div>
+                        <span class="text-goldAccent font-semibold text-xs tracking-wider uppercase">Executive Chef</span>
+                        <h3 class="font-serif text-2xl font-bold text-espressoDark mt-1">Mateo Rossi</h3>
+                        <p class="text-xs text-charcoalText/75 mt-3 leading-relaxed">
+                            Trained in Florence & Paris, Chef Mateo brings 18 years of Michelin-starred expertise focusing on wood-fired techniques and seasonal farm-to-table harvests.
+                        </p>
+                    </div>
+                    <div class="border-t border-goldAccent/20 pt-4">
+                        <span class="text-[10px] font-bold text-goldAccent uppercase tracking-widest block">Signature Dish</span>
+                        <p class="text-xs font-serif font-bold text-espressoDark">Truffle Infused Wood-Fired Ribeye</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chef 2 -->
+            <div class="bg-creamCard rounded-3xl overflow-hidden border border-goldAccent/20 shadow-md flex flex-col sm:flex-row">
+                <div class="sm:w-1/2 h-80 sm:h-auto overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1583394293214-28ded15ee548?auto=format&fit=crop&w=600&q=80" alt="Head Pastry Chef Sophie Laurent" class="w-full h-full object-cover">
+                </div>
+                <div class="sm:w-1/2 p-8 flex flex-col justify-between space-y-4">
+                    <div>
+                        <span class="text-goldAccent font-semibold text-xs tracking-wider uppercase">Head Pastry Chef</span>
+                        <h3 class="font-serif text-2xl font-bold text-espressoDark mt-1">Sophie Laurent</h3>
+                        <p class="text-xs text-charcoalText/75 mt-3 leading-relaxed">
+                            Master of artisanal patisserie and bean-to-bar chocolate creations. Sophie infuses delicate botanicals and organic fruit glazes into every sweet creation.
+                        </p>
+                    </div>
+                    <div class="border-t border-goldAccent/20 pt-4">
+                        <span class="text-[10px] font-bold text-goldAccent uppercase tracking-widest block">Signature Dessert</span>
+                        <p class="text-xs font-serif font-bold text-espressoDark">Gold-Leaf Pistachio Mille-Feuille</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. RESTAURANT AMBIENCE GALLERY -->
+    <section id="ambience" class="py-24 bg-espressoDark text-creamBg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-goldAccent uppercase font-semibold text-xs tracking-widest">Immersive Atmosphere</span>
+                <h2 class="font-serif text-3xl sm:text-5xl font-bold text-creamBg mt-2">Restaurant Ambience</h2>
+                <div class="w-16 h-0.5 bg-goldAccent mx-auto mt-4"></div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Gallery Item 1 -->
+                <div onclick="openLightbox('https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?auto=format&fit=crop&w=1200&q=80', 'Main Dining Room')" class="group relative h-72 rounded-2xl overflow-hidden cursor-pointer border border-goldAccent/20">
+                    <img src="https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?auto=format&fit=crop&w=600&q=80" alt="Main Dining Room" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-espressoDark/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
+                        <span class="text-xs font-serif text-goldAccent font-semibold">Main Dining Room</span>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 2 -->
+                <div onclick="openLightbox('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80', 'Garden Terrace')" class="group relative h-72 rounded-2xl overflow-hidden cursor-pointer border border-goldAccent/20">
+                    <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=600&q=80" alt="Garden Terrace" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-espressoDark/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
+                        <span class="text-xs font-serif text-goldAccent font-semibold">Garden Terrace</span>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 3 -->
+                <div onclick="openLightbox('https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=1200&q=80', 'Artisanal Coffee Bar')" class="group relative h-72 rounded-2xl overflow-hidden cursor-pointer border border-goldAccent/20">
+                    <img src="https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=600&q=80" alt="Artisanal Coffee Bar" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-espressoDark/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
+                        <span class="text-xs font-serif text-goldAccent font-semibold">Artisanal Coffee Bar</span>
+                    </div>
+                </div>
+
+                <!-- Gallery Item 4 -->
+                <div onclick="openLightbox('https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=1200&q=80', 'Wine Cellar & Lounge')" class="group relative h-72 rounded-2xl overflow-hidden cursor-pointer border border-goldAccent/20">
+                    <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=600&q=80" alt="Wine Cellar & Lounge" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-gradient-to-t from-espressoDark/90 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
+                        <span class="text-xs font-serif text-goldAccent font-semibold">Wine Cellar & Lounge</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. CUSTOMER TESTIMONIALS -->
+    <section id="testimonials" class="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div class="text-center max-w-2xl mx-auto mb-16">
+            <span class="text-goldAccent uppercase font-semibold text-xs tracking-widest">Patron Stories</span>
+            <h2 class="font-serif text-3xl sm:text-5xl font-bold text-espressoDark mt-2">Words From Guests</h2>
+            <div class="w-16 h-0.5 bg-goldAccent mx-auto mt-4"></div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="bg-creamCard p-8 rounded-3xl border border-goldAccent/20 shadow-md space-y-4">
+                <div class="text-goldAccent text-sm space-x-1">
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                </div>
+                <p class="text-xs text-charcoalText/80 leading-relaxed italic">
+                    "The Ribeye was cooked to absolute perfection. Combined with their outdoor terrace candle-lighting and extensive wine list, Aura provided our anniversary with magic."
+                </p>
+                <div class="pt-4 border-t border-goldAccent/10">
+                    <h4 class="font-serif font-bold text-sm text-espressoDark">Clara Harrington</h4>
+                    <span class="text-[10px] text-goldAccent font-semibold uppercase tracking-wider">Food Critic & Guest</span>
+                </div>
+            </div>
+
+            <div class="bg-creamCard p-8 rounded-3xl border border-goldAccent/20 shadow-md space-y-4">
+                <div class="text-goldAccent text-sm space-x-1">
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                </div>
+                <p class="text-xs text-charcoalText/80 leading-relaxed italic">
+                    "As a coffee enthusiast, their single-origin poured over Ethiopia Yirgacheffe alongside the Pistachio Mille-Feuille is easily the best brunch combination in the city."
+                </p>
+                <div class="pt-4 border-t border-goldAccent/10">
+                    <h4 class="font-serif font-bold text-sm text-espressoDark">Julian Vance</h4>
+                    <span class="text-[10px] text-goldAccent font-semibold uppercase tracking-wider">Local Resident</span>
+                </div>
+            </div>
+
+            <div class="bg-creamCard p-8 rounded-3xl border border-goldAccent/20 shadow-md space-y-4">
+                <div class="text-goldAccent text-sm space-x-1">
+                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                </div>
+                <p class="text-xs text-charcoalText/80 leading-relaxed italic">
+                    "Impeccable service! Chef Mateo came out personally to ask about our dietary preferences. Aura sets the benchmark for genuine hospitality."
+                </p>
+                <div class="pt-4 border-t border-goldAccent/10">
+                    <h4 class="font-serif font-bold text-sm text-espressoDark">Samantha Thorne</h4>
+                    <span class="text-[10px] text-goldAccent font-semibold uppercase tracking-wider">Verified Guest</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. OPENING HOURS & LOCATION DETAILS -->
+    <section id="hours-location" class="py-24 bg-creamBg border-t border-goldAccent/20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <!-- Hours & Info -->
+            <div class="lg:col-span-5 space-y-8">
+                <div>
+                    <span class="text-goldAccent uppercase font-semibold text-xs tracking-widest">Visit Us</span>
+                    <h2 class="font-serif text-3xl sm:text-4xl font-bold text-espressoDark mt-1">Hours & Location</h2>
+                    <div class="w-16 h-0.5 bg-goldAccent mt-4"></div>
+                </div>
+
+                <div class="bg-creamCard p-6 rounded-2xl border border-goldAccent/20 space-y-4">
+                    <h3 class="font-serif font-bold text-espressoDark text-lg flex items-center gap-2"><i class="fa-regular fa-clock text-goldAccent"></i> Operating Hours</h3>
+                    <div class="space-y-2 text-xs">
+                        <div class="flex justify-between py-1 border-b border-goldAccent/10">
+                            <span class="font-semibold text-espressoDark">Mon - Thu:</span>
+                            <span class="text-charcoalText/80">08:00 AM – 10:00 PM</span>
+                        </div>
+                        <div class="flex justify-between py-1 border-b border-goldAccent/10">
+                            <span class="font-semibold text-espressoDark">Fri - Sat:</span>
+                            <span class="text-goldAccent font-bold">08:00 AM – 11:30 PM</span>
+                        </div>
+                        <div class="flex justify-between py-1">
+                            <span class="font-semibold text-espressoDark">Sunday:</span>
+                            <span class="text-charcoalText/80">09:00 AM – 09:00 PM</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-3 text-xs text-charcoalText/80">
+                    <p class="flex items-center gap-3"><i class="fa-solid fa-location-dot text-goldAccent text-base"></i> 452 Grand Heritage Blvd, Suite 100, Culinary District</p>
+                    <p class="flex items-center gap-3"><i class="fa-solid fa-phone text-goldAccent text-base"></i> +1 (555) 234-AURA (2872)</p>
+                    <p class="flex items-center gap-3"><i class="fa-solid fa-envelope text-goldAccent text-base"></i> concierge@aurabistro.com</p>
+                </div>
+            </div>
+
+            <!-- Mock Interactive Google Map UI -->
+            <div class="lg:col-span-7 h-96 rounded-3xl overflow-hidden border border-goldAccent/30 shadow-xl relative bg-espressoMedium flex items-center justify-center text-center p-6">
+                <div class="absolute inset-0 opacity-40 bg-[url('https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&w=1000&q=80')] bg-cover bg-center"></div>
+                <div class="relative z-10 bg-espressoDark/90 backdrop-blur-md p-8 rounded-2xl border border-goldAccent/40 max-w-md space-y-4">
+                    <div class="w-12 h-12 rounded-full bg-goldAccent/20 text-goldAccent mx-auto flex items-center justify-center text-xl">
+                        <i class="fa-solid fa-map-pin"></i>
+                    </div>
+                    <h4 class="font-serif text-xl font-bold text-creamBg">Aura Artisanal Bistro & Cafe</h4>
+                    <p class="text-xs text-creamBg/70">Valet parking available at main entrance. Walking distance from Grand Central Plaza.</p>
+                    <button onclick="showToast('Opening directions in your maps app...')" class="px-6 py-2.5 bg-goldAccent text-espressoDark font-semibold text-xs tracking-wider uppercase rounded-full shadow hover:bg-goldHover transition-all">
+                        Get Directions
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 9. FOOTER -->
+    <footer class="bg-espressoDark text-creamBg/70 py-16 border-t border-goldAccent/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
+                <!-- Brand -->
+                <div class="space-y-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-full border border-goldAccent flex items-center justify-center bg-espressoMedium">
+                            <i class="fa-solid fa-utensils text-goldAccent text-sm"></i>
+                        </div>
+                        <span class="font-serif text-xl font-bold text-creamBg">AURA</span>
+                    </div>
+                    <p class="text-xs text-creamBg/60 leading-relaxed">
+                        Dedicated to wood-fired gastronomy, organic produce, and single-origin roast coffees.
+                    </p>
+                </div>
+
+                <!-- Navigation -->
+                <div>
+                    <h4 class="font-serif text-creamBg font-semibold text-sm mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-xs">
+                        <li><a href="#home" class="hover:text-goldAccent transition-colors">Home</a></li>
+                        <li><a href="#menu" class="hover:text-goldAccent transition-colors">Seasonal Menu</a></li>
+                        <li><a href="#reservation" class="hover:text-goldAccent transition-colors">Table Booking</a></li>
+                        <li><a href="#ambience" class="hover:text-goldAccent transition-colors">Atmosphere</a></li>
+                    </ul>
+                </div>
+
+                <!-- Newsletter -->
+                <div class="md:col-span-2 space-y-4">
+                    <h4 class="font-serif text-creamBg font-semibold text-sm">Aura Club & Special Invitations</h4>
+                    <p class="text-xs text-creamBg/60">Subscribe to receive seasonal tasting menu updates and exclusive event invitations.</p>
+                    <form onsubmit="handleNewsletterSubmit(event)" class="flex gap-2 max-w-md">
+                        <input type="email" required placeholder="Enter your email..." class="w-full px-4 py-3 rounded-xl bg-espressoMedium border border-goldAccent/30 text-xs text-creamBg focus:outline-none focus:border-goldAccent">
+                        <button type="submit" class="px-6 py-3 bg-goldAccent hover:bg-goldHover text-espressoDark font-semibold text-xs tracking-wider uppercase rounded-xl shrink-0 transition-all">
+                            Join
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="pt-8 border-t border-creamBg/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-creamBg/50">
+                <p>&copy; 2026 Aura Artisanal Bistro & Cafe. All rights reserved.</p>
+                <div class="flex gap-6 text-base text-goldAccent">
+                    <a href="#" class="hover:text-white transition-colors"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" class="hover:text-white transition-colors"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="#" class="hover:text-white transition-colors"><i class="fa-brands fa-tripadvisor"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- MENU ITEM DETAIL MODAL -->
+    <div id="menu-modal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden items-center justify-center p-4">
+        <div class="bg-creamCard max-w-lg w-full rounded-3xl overflow-hidden shadow-2xl relative border border-goldAccent/30">
+            <button onclick="closeMenuModal()" class="absolute top-4 right-4 bg-espressoDark/60 hover:bg-espressoDark text-goldAccent w-9 h-9 rounded-full flex items-center justify-center z-10 transition-colors">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="h-60 overflow-hidden relative">
+                <img id="modal-item-img" src="" alt="Menu item detail" class="w-full h-full object-cover">
+            </div>
+            <div class="p-6 sm:p-8 space-y-4">
+                <div class="flex items-center justify-between">
+                    <span id="modal-item-badge" class="bg-goldAccent/20 text-goldAccent text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full border border-goldAccent/30"></span>
+                    <span id="modal-item-price" class="font-serif text-2xl font-bold text-goldAccent"></span>
+                </div>
+                <h3 id="modal-item-title" class="font-serif text-2xl font-bold text-espressoDark"></h3>
+                <p id="modal-item-desc" class="text-xs text-charcoalText/80 leading-relaxed"></p>
+                <div id="modal-item-ingredients" class="pt-4 border-t border-goldAccent/20 text-xs text-charcoalText/70">
+                    <!-- Ingredients List -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- LIGHTBOX MODAL FOR GALLERY -->
+    <div id="lightbox-modal" class="fixed inset-0 z-50 bg-black/90 backdrop-blur-md hidden items-center justify-center p-4">
+        <button onclick="closeLightbox()" class="absolute top-6 right-6 text-goldAccent text-3xl hover:text-white"><i class="fa-solid fa-xmark"></i></button>
+        <div class="max-w-4xl text-center space-y-4">
+            <img id="lightbox-img" src="" alt="Gallery Preview" class="max-h-[80vh] rounded-2xl mx-auto border border-goldAccent/30 shadow-2xl">
+            <h4 id="lightbox-caption" class="font-serif text-goldAccent text-lg font-bold"></h4>
+        </div>
+    </div>
+
+    <!-- RESERVATION CONFIRMATION MODAL -->
+    <div id="res-modal" class="fixed inset-0 z-50 bg-black/75 backdrop-blur-sm hidden items-center justify-center p-4">
+        <div class="bg-espressoMedium border border-goldAccent/40 max-w-md w-full rounded-3xl p-8 text-creamBg text-center space-y-6 shadow-2xl">
+            <div class="w-16 h-16 rounded-full bg-goldAccent/20 text-goldAccent mx-auto flex items-center justify-center text-2xl border border-goldAccent/40">
+                <i class="fa-solid fa-circle-check"></i>
+            </div>
+            <div>
+                <span class="text-goldAccent uppercase font-bold text-xs tracking-widest block">Booking Received</span>
+                <h3 class="font-serif text-2xl font-bold text-creamBg mt-1">Reservation Confirmed</h3>
+            </div>
+            <div class="bg-espressoDark p-4 rounded-xl text-left space-y-2 text-xs border border-goldAccent/20">
+                <p><span class="text-goldAccent font-semibold">Guest Name:</span> <span id="conf-name"></span></p>
+                <p><span class="text-goldAccent font-semibold">Date & Time:</span> <span id="conf-datetime"></span></p>
+                <p><span class="text-goldAccent font-semibold">Party Size:</span> <span id="conf-guests"></span></p>
+                <p><span class="text-goldAccent font-semibold">Seating Area:</span> <span id="conf-seating"></span></p>
+            </div>
+            <p class="text-xs text-creamBg/60">A confirmation email has been sent to your email address.</p>
+            <button onclick="closeResModal()" class="w-full py-3 bg-goldAccent text-espressoDark font-semibold text-xs tracking-widest uppercase rounded-xl hover:bg-goldHover">
+                Close Confirmation
+            </button>
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFICATION -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 bg-goldAccent text-espressoDark px-6 py-3.5 rounded-2xl shadow-2xl flex items-center gap-3 transition-all duration-300 transform translate-y-20 opacity-0 pointer-events-none font-semibold text-xs uppercase tracking-wider">
+        <i class="fa-solid fa-circle-info text-base"></i>
+        <span id="toast-msg">Notification Message</span>
+    </div>
+
+    <!-- JAVASCRIPT CODE -->
+    <script>
+        // Menu Items Database
+        const menuItems = [
+            {
+                id: 1,
+                title: 'Truffle Wood-Fired Ribeye',
+                category: 'specials',
+                price: '$48.00',
+                badge: "Chef's Signature",
+                image: 'https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80',
+                desc: 'Prime 28-day dry-aged ribeye seared over white oak, infused with black truffle butter and charred asparagus.',
+                ingredients: '28-Day Dry Aged Beef, Black Winter Truffle, Organic Asparagus, Smoked Sea Salt'
+            },
+            {
+                id: 2,
+                title: 'Artisanal Avocado Tartine',
+                category: 'breakfast',
+                price: '$18.00',
+                badge: 'Vegan Option',
+                image: 'https://images.unsplash.com/photo-1525351484163-7529414344d8?auto=format&fit=crop&w=600&q=80',
+                desc: 'Toasted organic sourdough topped with smashed Hass avocado, heirloom tomatoes, microgreens, and poached farm egg.',
+                ingredients: 'Organic Sourdough, Hass Avocado, Heirloom Tomatoes, Organic Poached Egg, Extra Virgin Olive Oil'
+            },
+            {
+                id: 3,
+                title: 'Wild Salmon Risotto',
+                category: 'mains',
+                price: '$36.00',
+                badge: 'Gluten-Free',
+                image: 'https://images.unsplash.com/photo-1467003909585-2f8a72700288?auto=format&fit=crop&w=600&q=80',
+                desc: 'Pan-seared wild king salmon served over saffron Arborio risotto with charred lemon and pea shoots.',
+                ingredients: 'Wild King Salmon, Carnaroli Rice, Iranian Saffron, Aged Parmesan, Fresh Pea Shoots'
+            },
+            {
+                id: 4,
+                title: 'Gold-Leaf Pistachio Mille-Feuille',
+                category: 'coffee',
+                price: '$16.00',
+                badge: 'House Specialty',
+                image: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=600&q=80',
+                desc: 'Caramelized puff pastry layers filled with Sicilian pistachio mousseline and adorned with edible 24k gold leaf.',
+                ingredients: 'French Puff Pastry, Sicilian Pistachios, Vanilla Bean Mousseline, 24k Gold Leaf'
+            },
+            {
+                id: 5,
+                title: 'Single-Origin Ethiopian Yirgacheffe',
+                category: 'coffee',
+                price: '$8.50',
+                badge: 'Organic Roast',
+                image: 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=600&q=80',
+                desc: 'Hand-poured pour-over coffee featuring delicate jasmine floral aromas, citrus notes, and crisp bergamot finish.',
+                ingredients: '100% Single-Origin Arabica Yirgacheffe Beans, Triple-Filtered Water'
+            },
+            {
+                id: 6,
+                title: 'Château Margaux Grand Cru (2015)',
+                category: 'drinks',
+                price: '$120.00 / Glass',
+                badge: 'Reserve Cellar',
+                image: 'https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?auto=format&fit=crop&w=600&q=80',
+                desc: 'An exquisite vintage Bordeaux presenting velvet tannins, blackcurrant aromas, and lingering oak notes.',
+                ingredients: 'Cabernet Sauvignon, Merlot, Petit Verdot Vintage Blend'
+            }
+        ];
+
+        // On Load
+        window.onload = function() {
+            renderMenu(menuItems);
+            // Default reservation date to tomorrow
+            const tomorrow = new Date();
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            document.getElementById('res-date').value = tomorrow.toISOString().split('T')[0];
+        };
+
+        // Render Menu Items
+        function renderMenu(items) {
+            const grid = document.getElementById('menu-grid');
+            grid.innerHTML = '';
+
+            items.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'bg-creamCard rounded-3xl overflow-hidden border border-goldAccent/20 shadow-md hover:shadow-xl transition-all duration-300 flex flex-col sm:flex-row group';
+                card.innerHTML = `
+                    <div class="sm:w-2/5 h-48 sm:h-auto overflow-hidden relative">
+                        <img src="${item.image}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <span class="absolute top-3 left-3 bg-espressoDark/90 backdrop-blur-md text-goldAccent text-[9px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full border border-goldAccent/30">
+                            ${item.badge}
+                        </span>
+                    </div>
+                    <div class="sm:w-3/5 p-6 flex flex-col justify-between">
+                        <div>
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="font-serif font-bold text-lg text-espressoDark group-hover:text-goldHover transition-colors">${item.title}</h3>
+                                <span class="font-serif font-bold text-goldAccent text-base">${item.price}</span>
+                            </div>
+                            <p class="text-xs text-charcoalText/75 line-clamp-2 leading-relaxed mb-4">${item.desc}</p>
+                        </div>
+                        <button onclick="openMenuModal(${item.id})" class="self-start text-xs font-bold text-espressoDark hover:text-goldAccent flex items-center gap-2 transition-colors uppercase tracking-wider">
+                            View Details <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                        </button>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // Filter Menu Categories
+        function filterMenu(category) {
+            document.querySelectorAll('.menu-tab').forEach(tab => {
+                tab.classList.remove('bg-espressoDark', 'text-goldAccent', 'shadow-md');
+                tab.classList.add('bg-creamCard', 'text-espressoDark');
+            });
+
+            const activeTab = document.getElementById(`tab-${category}`);
+            if(activeTab) {
+                activeTab.classList.remove('bg-creamCard', 'text-espressoDark');
+                activeTab.classList.add('bg-espressoDark', 'text-goldAccent', 'shadow-md');
+            }
+
+            if(category === 'all') {
+                renderMenu(menuItems);
+            } else {
+                const filtered = menuItems.filter(item => item.category === category);
+                renderMenu(filtered);
+            }
+        }
+
+        // Detail Modal Logic
+        function openMenuModal(id) {
+            const item = menuItems.find(m => m.id === id);
+            if(!item) return;
+
+            document.getElementById('modal-item-img').src = item.image;
+            document.getElementById('modal-item-badge').innerText = item.badge;
+            document.getElementById('modal-item-price').innerText = item.price;
+            document.getElementById('modal-item-title').innerText = item.title;
+            document.getElementById('modal-item-desc').innerText = item.desc;
+            document.getElementById('modal-item-ingredients').innerHTML = `<strong>Key Ingredients:</strong> ${item.ingredients}`;
+
+            const modal = document.getElementById('menu-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeMenuModal() {
+            const modal = document.getElementById('menu-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        // Lightbox Logic
+        function openLightbox(imgSrc, caption) {
+            document.getElementById('lightbox-img').src = imgSrc;
+            document.getElementById('lightbox-caption').innerText = caption;
+            const modal = document.getElementById('lightbox-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeLightbox() {
+            const modal = document.getElementById('lightbox-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        // Reservation Form Handling
+        function handleReservationSubmit(e) {
+            e.preventDefault();
+
+            const name = document.getElementById('res-name').value;
+            const date = document.getElementById('res-date').value;
+            const time = document.getElementById('res-time').value;
+            const guests = document.getElementById('res-guests').value;
+            const seating = document.getElementById('res-seating').value;
+
+            document.getElementById('conf-name').innerText = name;
+            document.getElementById('conf-datetime').innerText = `${date} at ${time}`;
+            document.getElementById('conf-guests').innerText = guests;
+            document.getElementById('conf-seating').innerText = seating;
+
+            const modal = document.getElementById('res-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+
+            e.target.reset();
+        }
+
+        function closeResModal() {
+            const modal = document.getElementById('res-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        // Utility Toast & Mobile Nav
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-msg').innerText = message;
+            toast.classList.remove('translate-y-20', 'opacity-0', 'pointer-events-none');
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0', 'pointer-events-none');
+            }, 3000);
+        }
+
+        function handleNewsletterSubmit(e) {
+            e.preventDefault();
+            showToast("Thank you for subscribing to Aura!");
+            e.target.reset();
+        }
+
+        function toggleMobileNav() {
+            const nav = document.getElementById('mobile-nav');
+            nav.classList.toggle('hidden');
+        }
+    </script>
+</body>
+</html>

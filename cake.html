@@ -1,0 +1,903 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sweet Delights Bakery | Freshly Baked Joy Daily</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        cream: '#FFFBF5',
+                        pastelPink: '#FCE7F0',
+                        softPink: '#F472B6',
+                        roseGold: '#E8A598',
+                        warmGold: '#D97706',
+                        chocoDark: '#3C2218',
+                        chocoLight: '#5C3A21',
+                        chocoCream: '#2D1B14'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts & FontAwesome Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #FFFBF5; color: #3C2218; }
+        .font-serif { font-family: 'Playfair Display', serif; }
+        .hero-bg {
+            background: linear-gradient(rgba(60, 34, 24, 0.45), rgba(60, 34, 24, 0.65)), url('https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #FFFBF5; }
+        ::-webkit-scrollbar-thumb { background: #E8A598; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #D97706; }
+    </style>
+</head>
+<body class="antialiased selection:bg-pastelPink selection:text-chocoDark">
+
+    <!-- HEADER / NAVIGATION -->
+    <header class="sticky top-0 z-40 bg-cream/95 backdrop-blur-md border-b border-roseGold/20 shadow-sm transition-all duration-300" id="main-header">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <a href="#" class="flex items-center gap-3 group">
+                    <div class="w-12 h-12 rounded-full bg-pastelPink flex items-center justify-center text-chocoDark group-hover:scale-105 transition-transform shadow-inner">
+                        <i class="fa-solid font-bold fa-cake-candles text-2xl text-roseGold"></i>
+                    </div>
+                    <div>
+                        <span class="font-serif text-2xl font-bold tracking-tight text-chocoDark block leading-none">Sweet Delights</span>
+                        <span class="text-xs uppercase tracking-widest text-warmGold font-semibold">Artisan Bakery</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Nav -->
+                <nav class="hidden md:flex items-center gap-8 font-medium text-sm text-chocoDark/80">
+                    <a href="#home" class="hover:text-warmGold transition-colors">Home</a>
+                    <a href="#menu" class="hover:text-warmGold transition-colors">Menu</a>
+                    <a href="#custom-cake" class="hover:text-warmGold transition-colors">Custom Cakes</a>
+                    <a href="#offers" class="hover:text-warmGold transition-colors">Seasonal Offers</a>
+                    <a href="#gallery" class="hover:text-warmGold transition-colors">Gallery</a>
+                    <a href="#contact" class="hover:text-warmGold transition-colors">Contact</a>
+                </nav>
+
+                <!-- Actions (Cart Button + Mobile Toggle) -->
+                <div class="flex items-center gap-4">
+                    <button onclick="toggleCartModal()" class="relative p-2.5 rounded-full bg-pastelPink/60 hover:bg-pastelPink text-chocoDark transition-all hover:scale-105 focus:outline-none focus:ring-2 focus:ring-roseGold">
+                        <i class="fa-solid fa-basket-shopping text-xl text-chocoDark"></i>
+                        <span id="cart-badge" class="absolute -top-1 -right-1 bg-warmGold text-white text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center shadow-md">0</span>
+                    </button>
+
+                    <!-- Mobile Menu Button -->
+                    <button id="mobile-menu-btn" onclick="toggleMobileNav()" class="md:hidden p-2 rounded-lg text-chocoDark hover:bg-pastelPink focus:outline-none">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Drawer -->
+        <div id="mobile-nav" class="hidden md:hidden bg-cream border-b border-roseGold/20 px-4 pt-2 pb-6 space-y-3">
+            <a href="#home" onclick="toggleMobileNav()" class="block py-2 text-chocoDark font-medium hover:text-warmGold">Home</a>
+            <a href="#menu" onclick="toggleMobileNav()" class="block py-2 text-chocoDark font-medium hover:text-warmGold">Menu</a>
+            <a href="#custom-cake" onclick="toggleMobileNav()" class="block py-2 text-chocoDark font-medium hover:text-warmGold">Custom Cakes</a>
+            <a href="#offers" onclick="toggleMobileNav()" class="block py-2 text-chocoDark font-medium hover:text-warmGold">Seasonal Offers</a>
+            <a href="#gallery" onclick="toggleMobileNav()" class="block py-2 text-chocoDark font-medium hover:text-warmGold">Gallery</a>
+            <a href="#contact" onclick="toggleMobileNav()" class="block py-2 text-chocoDark font-medium hover:text-warmGold">Contact</a>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section id="home" class="hero-bg min-h-[85vh] flex items-center justify-center text-center px-4 relative overflow-hidden">
+        <div class="max-w-3xl mx-auto text-white space-y-6 py-12">
+            <span class="inline-block px-4 py-1.5 rounded-full bg-pastelPink/20 backdrop-blur-md text-pastelPink font-medium text-sm tracking-wider uppercase border border-pastelPink/30 animate-pulse">
+                Handcrafted with Love & Finest Ingredients
+            </span>
+            <h1 class="font-serif text-4xl sm:text-6xl lg:text-7xl font-bold leading-tight drop-shadow-md">
+                Freshly Baked Joy Daily
+            </h1>
+            <p class="text-lg sm:text-xl text-cream/90 max-w-2xl mx-auto font-light leading-relaxed">
+                Indulge in our exquisite collection of artisanal cakes, golden flaky pastries, and fresh oven-baked cookies crafted for your sweetest celebrations.
+            </p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+                <a href="#custom-cake" class="w-full sm:w-auto px-8 py-4 bg-warmGold hover:bg-amber-600 text-white font-semibold rounded-full shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5 text-center">
+                    <i class="fa-solid fa-wand-magic-sparkles mr-2"></i> Order Custom Cake
+                </a>
+                <a href="#menu" class="w-full sm:w-auto px-8 py-4 bg-cream/20 backdrop-blur-md hover:bg-cream/30 text-white border border-white/40 font-semibold rounded-full transition-all text-center">
+                    <i class="fa-solid fa-utensils mr-2"></i> Explore Menu
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- INTERACTIVE MENU SECTION -->
+    <section id="menu" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div class="text-center max-w-2xl mx-auto mb-12">
+            <span class="text-warmGold uppercase font-semibold text-xs tracking-widest">Our Delicious Selection</span>
+            <h2 class="font-serif text-3xl sm:text-4xl font-bold text-chocoDark mt-1">Baked Fresh Every Morning</h2>
+            <div class="w-16 h-1 bg-roseGold mx-auto mt-4 rounded-full"></div>
+        </div>
+
+        <!-- Filter Tabs -->
+        <div class="flex flex-wrap justify-center gap-2 sm:gap-4 mb-10">
+            <button onclick="filterMenu('all')" id="tab-all" class="menu-tab active px-6 py-2.5 rounded-full font-medium text-sm transition-all bg-chocoDark text-white shadow-md">All Items</button>
+            <button onclick="filterMenu('cakes')" id="tab-cakes" class="menu-tab px-6 py-2.5 rounded-full font-medium text-sm transition-all bg-pastelPink/60 text-chocoDark hover:bg-pastelPink">Cakes</button>
+            <button onclick="filterMenu('pastries')" id="tab-pastries" class="menu-tab px-6 py-2.5 rounded-full font-medium text-sm transition-all bg-pastelPink/60 text-chocoDark hover:bg-pastelPink">Pastries</button>
+            <button onclick="filterMenu('cookies')" id="tab-cookies" class="menu-tab px-6 py-2.5 rounded-full font-medium text-sm transition-all bg-pastelPink/60 text-chocoDark hover:bg-pastelPink">Cookies</button>
+        </div>
+
+        <!-- Products Grid -->
+        <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Dynamic Injection of Products -->
+        </div>
+    </section>
+
+    <!-- CUSTOM CAKE DESIGN REQUEST TOOL -->
+    <section id="custom-cake" class="py-20 bg-gradient-to-b from-pastelPink/30 to-cream border-y border-roseGold/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+                <!-- Info Column -->
+                <div class="lg:col-span-5 space-y-6">
+                    <span class="text-warmGold uppercase font-semibold text-xs tracking-widest">Tailored Celebrations</span>
+                    <h2 class="font-serif text-3xl sm:text-4xl font-bold text-chocoDark">Design Your Dream Cake</h2>
+                    <p class="text-chocoDark/80 leading-relaxed">
+                        Planning a birthday, wedding, or milestone celebration? Use our interactive cake customizer to estimate your personalized cake cost and send a design quote directly to our master bakers.
+                    </p>
+                    
+                    <div class="space-y-4 pt-4">
+                        <div class="flex items-start gap-4 p-4 rounded-xl bg-white/80 border border-roseGold/20 shadow-sm">
+                            <div class="w-10 h-10 rounded-full bg-pastelPink flex items-center justify-center shrink-0 text-roseGold font-bold">1</div>
+                            <div>
+                                <h4 class="font-bold text-chocoDark">Select Flavors & Tiers</h4>
+                                <p class="text-xs text-chocoDark/70">Pick your favorite sponge, luscious fillings, and structural tiers.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4 p-4 rounded-xl bg-white/80 border border-roseGold/20 shadow-sm">
+                            <div class="w-10 h-10 rounded-full bg-pastelPink flex items-center justify-center shrink-0 text-roseGold font-bold">2</div>
+                            <div>
+                                <h4 class="font-bold text-chocoDark">Dietary Requirements</h4>
+                                <p class="text-xs text-chocoDark/70">Eggless, Gluten-Free, and Vegan options tailored safely for your guests.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4 p-4 rounded-xl bg-white/80 border border-roseGold/20 shadow-sm">
+                            <div class="w-10 h-10 rounded-full bg-pastelPink flex items-center justify-center shrink-0 text-roseGold font-bold">3</div>
+                            <div>
+                                <h4 class="font-bold text-chocoDark">Instant Price & Order</h4>
+                                <p class="text-xs text-chocoDark/70">Get immediate estimated quotes and submit design inspiration photos.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Custom Form Container -->
+                <div class="lg:col-span-7 bg-white p-6 sm:p-8 rounded-3xl shadow-xl border border-roseGold/20">
+                    <form id="custom-cake-form" onsubmit="handleCustomCakeSubmit(event)" class="space-y-6">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <!-- Sponge Flavor -->
+                            <div>
+                                <label class="block text-sm font-semibold text-chocoDark mb-2">Sponge Flavor</label>
+                                <select id="cake-sponge" onchange="calculateCakeEstimate()" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-roseGold focus:border-roseGold bg-cream/30 text-sm">
+                                    <option value="vanilla" data-price="25">Classic Vanilla Bean ($25 base)</option>
+                                    <option value="chocolate" data-price="28">Belgian Dark Chocolate ($28 base)</option>
+                                    <option value="redvelvet" data-price="30">Red Velvet ($30 base)</option>
+                                    <option value="lemon" data-price="28">Lemon Raspberry ($28 base)</option>
+                                    <option value="pistachio" data-price="35">Pistachio Rosewater ($35 base)</option>
+                                </select>
+                            </div>
+
+                            <!-- Filling & Frosting -->
+                            <div>
+                                <label class="block text-sm font-semibold text-chocoDark mb-2">Filling / Frosting</label>
+                                <select id="cake-filling" onchange="calculateCakeEstimate()" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-roseGold focus:border-roseGold bg-cream/30 text-sm">
+                                    <option value="buttercream" data-price="10">Vanilla Buttercream (+ $10)</option>
+                                    <option value="ganache" data-price="15">Chocolate Fudge Ganache (+ $15)</option>
+                                    <option value="creamcheese" data-price="12">Cream Cheese Frosting (+ $12)</option>
+                                    <option value="fruitcompote" data-price="14">Fresh Berry Compote (+ $14)</option>
+                                </select>
+                            </div>
+
+                            <!-- Size / Servings -->
+                            <div>
+                                <label class="block text-sm font-semibold text-chocoDark mb-2">Size & Servings</label>
+                                <select id="cake-size" onchange="calculateCakeEstimate()" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-roseGold focus:border-roseGold bg-cream/30 text-sm">
+                                    <option value="small" data-mult="1">Small (6" - Serves 8-10)</option>
+                                    <option value="medium" data-mult="1.6">Medium (8" - Serves 15-20)</option>
+                                    <option value="large" data-mult="2.4">Large (10" - Serves 25-30)</option>
+                                    <option value="xlarge" data-mult="3.5">Party Size (12" - Serves 40+)</option>
+                                </select>
+                            </div>
+
+                            <!-- Tiers -->
+                            <div>
+                                <label class="block text-sm font-semibold text-chocoDark mb-2">Number of Tiers</label>
+                                <select id="cake-tiers" onchange="calculateCakeEstimate()" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-roseGold focus:border-roseGold bg-cream/30 text-sm">
+                                    <option value="1" data-price="0">1 Tier (Standard)</option>
+                                    <option value="2" data-price="30">2 Tiers (+ $30 structural base)</option>
+                                    <option value="3" data-price="65">3 Tiers (+ $65 structural base)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Dietary Choices -->
+                        <div>
+                            <label class="block text-sm font-semibold text-chocoDark mb-2">Dietary Options</label>
+                            <div class="flex flex-wrap gap-4">
+                                <label class="flex items-center gap-2 cursor-pointer text-sm text-chocoDark">
+                                    <input type="checkbox" id="diet-eggless" onchange="calculateCakeEstimate()" class="rounded text-roseGold focus:ring-roseGold w-4 h-4"> Eggless (+ $5)
+                                </label>
+                                <label class="flex items-center gap-2 cursor-pointer text-sm text-chocoDark">
+                                    <input type="checkbox" id="diet-glutenfree" onchange="calculateCakeEstimate()" class="rounded text-roseGold focus:ring-roseGold w-4 h-4"> Gluten-Free (+ $8)
+                                </label>
+                                <label class="flex items-center gap-2 cursor-pointer text-sm text-chocoDark">
+                                    <input type="checkbox" id="diet-vegan" onchange="calculateCakeEstimate()" class="rounded text-roseGold focus:ring-roseGold w-4 h-4"> 100% Vegan (+ $10)
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Inspiration / Custom Text -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-semibold text-chocoDark mb-2">Cake Message / Inscription</label>
+                                <input type="text" placeholder="e.g. 'Happy 21st Birthday Sarah!'" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-roseGold focus:border-roseGold bg-cream/30 text-sm">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-chocoDark mb-2">Design Theme / Reference Photo</label>
+                                <input type="text" placeholder="e.g., Floral Pastel / Minimalist Gold Leaf" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-roseGold focus:border-roseGold bg-cream/30 text-sm">
+                            </div>
+                        </div>
+
+                        <!-- Estimated Price & Submit -->
+                        <div class="p-4 rounded-2xl bg-pastelPink/40 border border-roseGold/30 flex flex-col sm:flex-row items-center justify-between gap-4">
+                            <div>
+                                <span class="text-xs uppercase text-chocoDark/70 font-bold block">Estimated Custom Quote</span>
+                                <span id="custom-price" class="text-3xl font-bold font-serif text-warmGold">$35.00</span>
+                            </div>
+                            <button type="submit" class="w-full sm:w-auto px-8 py-3.5 bg-chocoDark hover:bg-chocoLight text-white font-semibold rounded-xl transition-all shadow-md">
+                                Submit Quote Request
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SEASONAL OFFERS & PROMOS -->
+    <section id="offers" class="py-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div class="bg-gradient-to-r from-chocoDark via-chocoLight to-chocoCream rounded-3xl p-8 sm:p-12 text-white relative overflow-hidden shadow-2xl">
+            <!-- Background Decorative Element -->
+            <div class="absolute -right-12 -bottom-12 w-64 h-64 bg-roseGold/10 rounded-full blur-3xl pointer-events-none"></div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center relative z-10">
+                <div class="lg:col-span-7 space-y-4">
+                    <span class="inline-block px-3 py-1 rounded-full bg-warmGold/30 border border-warmGold/40 text-warmGold font-semibold text-xs uppercase tracking-wider">Limited Time Offer</span>
+                    <h2 class="font-serif text-3xl sm:text-5xl font-bold text-cream">Holiday Festive Special!</h2>
+                    <p class="text-cream/80 text-base sm:text-lg">Get <span class="text-warmGold font-bold">20% OFF</span> on all Velvet Fruit Cakes and Artisan Cookie Gift Boxes. Perfect for cozy family gatherings!</p>
+                    
+                    <div class="flex items-center gap-3 pt-2">
+                        <span class="text-sm text-cream/70">Use Promo Code:</span>
+                        <span onclick="copyPromoCode('SWEET20')" title="Click to copy" class="cursor-pointer bg-cream/20 hover:bg-cream/30 px-3 py-1.5 rounded-lg border border-dashed border-roseGold font-mono text-warmGold font-bold text-lg flex items-center gap-2">
+                            SWEET20 <i class="fa-regular fa-copy text-xs"></i>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Countdown Timer Card -->
+                <div class="lg:col-span-5 bg-white/10 backdrop-blur-md border border-white/15 p-6 rounded-2xl text-center">
+                    <h3 class="text-sm uppercase tracking-widest text-cream/80 mb-4 font-medium">Offer Ends In:</h3>
+                    <div class="grid grid-cols-4 gap-2 text-center" id="countdown-timer">
+                        <div class="bg-cream/20 p-3 rounded-xl border border-white/10">
+                            <span id="timer-days" class="block font-serif text-2xl sm:text-3xl font-bold text-warmGold">02</span>
+                            <span class="text-[10px] uppercase tracking-wider text-cream/70">Days</span>
+                        </div>
+                        <div class="bg-cream/20 p-3 rounded-xl border border-white/10">
+                            <span id="timer-hours" class="block font-serif text-2xl sm:text-3xl font-bold text-warmGold">14</span>
+                            <span class="text-[10px] uppercase tracking-wider text-cream/70">Hours</span>
+                        </div>
+                        <div class="bg-cream/20 p-3 rounded-xl border border-white/10">
+                            <span id="timer-mins" class="block font-serif text-2xl sm:text-3xl font-bold text-warmGold">38</span>
+                            <span class="text-[10px] uppercase tracking-wider text-cream/70">Mins</span>
+                        </div>
+                        <div class="bg-cream/20 p-3 rounded-xl border border-white/10">
+                            <span id="timer-secs" class="block font-serif text-2xl sm:text-3xl font-bold text-warmGold">45</span>
+                            <span class="text-[10px] uppercase tracking-wider text-cream/70">Secs</span>
+                        </div>
+                    </div>
+                    <button onclick="applyOfferPromo('SWEET20')" class="w-full mt-6 py-3 bg-warmGold hover:bg-amber-600 text-white font-semibold rounded-xl transition-all shadow-md">
+                        Claim Discount Now
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- VISUAL GALLERY SECTION -->
+    <section id="gallery" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div class="text-center max-w-2xl mx-auto mb-12">
+            <span class="text-warmGold uppercase font-semibold text-xs tracking-widest">Visual Feast</span>
+            <h2 class="font-serif text-3xl sm:text-4xl font-bold text-chocoDark mt-1">Our Bakery Showcase</h2>
+            <p class="text-chocoDark/70 text-sm mt-2">A glimpse into our freshly crafted cakes, party desserts, and artisanal daily bakes.</p>
+            <div class="w-16 h-1 bg-roseGold mx-auto mt-4 rounded-full"></div>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4" id="gallery-grid">
+            <!-- Gallery Item 1 -->
+            <div class="group relative aspect-square overflow-hidden rounded-2xl cursor-pointer shadow-sm hover:shadow-xl transition-all" onclick="openLightbox('https://images.unsplash.com/photo-1535141192574-5d4897c13136?auto=format&fit=crop&w=1000&q=80', 'Elegant Floral Layer Cake')">
+                <img src="https://images.unsplash.com/photo-1535141192574-5d4897c13136?auto=format&fit=crop&w=600&q=80" alt="Cake Design" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                <div class="absolute inset-0 bg-gradient-to-t from-chocoDark/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                    <span class="text-white text-sm font-medium"><i class="fa-solid fa-magnifying-glass-plus mr-1"></i> Floral Layer Cake</span>
+                </div>
+            </div>
+            <!-- Gallery Item 2 -->
+            <div class="group relative aspect-square overflow-hidden rounded-2xl cursor-pointer shadow-sm hover:shadow-xl transition-all" onclick="openLightbox('https://images.unsplash.com/photo-1550617931-e17a7b70dce2?auto=format&fit=crop&w=1000&q=80', 'Artisanal Fresh Cupcakes')">
+                <img src="https://images.unsplash.com/photo-1550617931-e17a7b70dce2?auto=format&fit=crop&w=600&q=80" alt="Cupcakes" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                <div class="absolute inset-0 bg-gradient-to-t from-chocoDark/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                    <span class="text-white text-sm font-medium"><i class="fa-solid fa-magnifying-glass-plus mr-1"></i> Artisan Cupcakes</span>
+                </div>
+            </div>
+            <!-- Gallery Item 3 -->
+            <div class="group relative aspect-square overflow-hidden rounded-2xl cursor-pointer shadow-sm hover:shadow-xl transition-all" onclick="openLightbox('https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=1000&q=80', 'Golden Flaky Croissants')">
+                <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=600&q=80" alt="Croissants" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                <div class="absolute inset-0 bg-gradient-to-t from-chocoDark/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                    <span class="text-white text-sm font-medium"><i class="fa-solid fa-magnifying-glass-plus mr-1"></i> Flaky Croissants</span>
+                </div>
+            </div>
+            <!-- Gallery Item 4 -->
+            <div class="group relative aspect-square overflow-hidden rounded-2xl cursor-pointer shadow-sm hover:shadow-xl transition-all" onclick="openLightbox('https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&w=1000&q=80', 'Fresh Macarons Collection')">
+                <img src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&w=600&q=80" alt="Macarons" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                <div class="absolute inset-0 bg-gradient-to-t from-chocoDark/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                    <span class="text-white text-sm font-medium"><i class="fa-solid fa-magnifying-glass-plus mr-1"></i> Pastel Macarons</span>
+                </div>
+            </div>
+            <!-- Gallery Item 5 -->
+            <div class="group relative aspect-square overflow-hidden rounded-2xl cursor-pointer shadow-sm hover:shadow-xl transition-all" onclick="openLightbox('https://images.unsplash.com/photo-1588195538326-c5b1e9f80a1b?auto=format&fit=crop&w=1000&q=80', 'Chocolate Drip Celebration Cake')">
+                <img src="https://images.unsplash.com/photo-1588195538326-c5b1e9f80a1b?auto=format&fit=crop&w=600&q=80" alt="Chocolate Cake" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                <div class="absolute inset-0 bg-gradient-to-t from-chocoDark/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                    <span class="text-white text-sm font-medium"><i class="fa-solid fa-magnifying-glass-plus mr-1"></i> Chocolate Drip Cake</span>
+                </div>
+            </div>
+            <!-- Gallery Item 6 -->
+            <div class="group relative aspect-square overflow-hidden rounded-2xl cursor-pointer shadow-sm hover:shadow-xl transition-all" onclick="openLightbox('https://images.unsplash.com/photo-1499636136210-6f4ee915583e?auto=format&fit=crop&w=1000&q=80', 'Oven Fresh Cookies')">
+                <img src="https://images.unsplash.com/photo-1499636136210-6f4ee915583e?auto=format&fit=crop&w=600&q=80" alt="Cookies" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                <div class="absolute inset-0 bg-gradient-to-t from-chocoDark/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                    <span class="text-white text-sm font-medium"><i class="fa-solid fa-magnifying-glass-plus mr-1"></i> Choco-Chip Cookies</span>
+                </div>
+            </div>
+            <!-- Gallery Item 7 -->
+            <div class="group relative aspect-square overflow-hidden rounded-2xl cursor-pointer shadow-sm hover:shadow-xl transition-all" onclick="openLightbox('https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?auto=format&fit=crop&w=1000&q=80', 'Berry Tart Delight')">
+                <img src="https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?auto=format&fit=crop&w=600&q=80" alt="Berry Tart" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                <div class="absolute inset-0 bg-gradient-to-t from-chocoDark/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                    <span class="text-white text-sm font-medium"><i class="fa-solid fa-magnifying-glass-plus mr-1"></i> Berry Cream Tart</span>
+                </div>
+            </div>
+            <!-- Gallery Item 8 -->
+            <div class="group relative aspect-square overflow-hidden rounded-2xl cursor-pointer shadow-sm hover:shadow-xl transition-all" onclick="openLightbox('https://images.unsplash.com/photo-1519869325930-281384150729?auto=format&fit=crop&w=1000&q=80', 'Custom Wedding Cake Tier')">
+                <img src="https://images.unsplash.com/photo-1519869325930-281384150729?auto=format&fit=crop&w=600&q=80" alt="Wedding Cake" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                <div class="absolute inset-0 bg-gradient-to-t from-chocoDark/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-4">
+                    <span class="text-white text-sm font-medium"><i class="fa-solid fa-magnifying-glass-plus mr-1"></i> Wedding Tier Cake</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- STORE CONTACT & LOCATION SECTION -->
+    <section id="contact" class="py-20 bg-pastelPink/20 border-t border-roseGold/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+                <!-- Contact Info & Hours -->
+                <div class="lg:col-span-5 space-y-8">
+                    <div>
+                        <span class="text-warmGold uppercase font-semibold text-xs tracking-widest">Visit Us</span>
+                        <h2 class="font-serif text-3xl sm:text-4xl font-bold text-chocoDark mt-1">Bakery Location & Hours</h2>
+                        <p class="text-chocoDark/70 text-sm mt-2">Drop by for fresh morning pastries or discuss your party orders in person.</p>
+                    </div>
+
+                    <div class="space-y-4">
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-pastelPink flex items-center justify-center shrink-0 text-warmGold">
+                                <i class="fa-solid fa-location-dot"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-chocoDark text-sm">Our Address</h4>
+                                <p class="text-sm text-chocoDark/80">124 Pastry Lane, Sweetville, NY 10001</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-pastelPink flex items-center justify-center shrink-0 text-warmGold">
+                                <i class="fa-solid fa-clock"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-chocoDark text-sm">Opening Hours</h4>
+                                <p class="text-sm text-chocoDark/80">Monday – Saturday: 8:00 AM – 8:00 PM</p>
+                                <p class="text-sm text-chocoDark/80">Sunday: 9:00 AM – 6:00 PM</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4">
+                            <div class="w-10 h-10 rounded-full bg-pastelPink flex items-center justify-center shrink-0 text-warmGold">
+                                <i class="fa-solid fa-phone"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-chocoDark text-sm">Get in Touch</h4>
+                                <p class="text-sm text-chocoDark/80">Phone: (555) 234-5678</p>
+                                <p class="text-sm text-chocoDark/80">Email: hello@sweetdelights.com</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Visual Map Card Simulation -->
+                    <div class="relative h-48 rounded-2xl overflow-hidden border border-roseGold/30 shadow-inner group">
+                        <img src="https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&w=800&q=80" alt="Map View" class="w-full h-full object-cover filter brightness-95 group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-chocoDark/30 flex items-center justify-center">
+                            <div class="bg-white/90 backdrop-blur-md px-4 py-2 rounded-full text-xs font-bold text-chocoDark shadow-md flex items-center gap-2">
+                                <i class="fa-solid fa-map-pin text-roseGold"></i> 124 Pastry Lane, Sweetville
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Inquiry Form -->
+                <div class="lg:col-span-7 bg-white p-6 sm:p-8 rounded-3xl shadow-xl border border-roseGold/20">
+                    <h3 class="font-serif text-2xl font-bold text-chocoDark mb-6">Send Us a Message</h3>
+                    <form onsubmit="handleContactSubmit(event)" class="space-y-4">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-xs font-semibold text-chocoDark mb-1">Your Name</label>
+                                <input type="text" required placeholder="Jane Doe" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-roseGold focus:border-roseGold bg-cream/30 text-sm">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-chocoDark mb-1">Email Address</label>
+                                <input type="email" required placeholder="jane@example.com" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-roseGold focus:border-roseGold bg-cream/30 text-sm">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-chocoDark mb-1">Subject</label>
+                            <input type="text" required placeholder="General Inquiry / Catering Order" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-roseGold focus:border-roseGold bg-cream/30 text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-chocoDark mb-1">Message</label>
+                            <textarea rows="4" required placeholder="How can we help make your occasion special?" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-roseGold focus:border-roseGold bg-cream/30 text-sm"></textarea>
+                        </div>
+                        <button type="submit" class="w-full py-3.5 bg-warmGold hover:bg-amber-600 text-white font-semibold rounded-xl transition-all shadow-md">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-chocoDark text-cream/80 py-12 border-t border-chocoLight">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+                <!-- Brand Info -->
+                <div class="space-y-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-pastelPink/20 flex items-center justify-center text-pastelPink">
+                            <i class="fa-solid fa-cake-candles text-xl"></i>
+                        </div>
+                        <span class="font-serif text-xl font-bold text-white">Sweet Delights</span>
+                    </div>
+                    <p class="text-xs text-cream/70 leading-relaxed">
+                        Handcrafted artisanal cakes, fresh pastries, and signature desserts baked daily with love and quality ingredients.
+                    </p>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="text-white font-semibold text-sm mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-xs">
+                        <li><a href="#home" class="hover:text-warmGold transition-colors">Home</a></li>
+                        <li><a href="#menu" class="hover:text-warmGold transition-colors">Our Menu</a></li>
+                        <li><a href="#custom-cake" class="hover:text-warmGold transition-colors">Custom Cake Calculator</a></li>
+                        <li><a href="#offers" class="hover:text-warmGold transition-colors">Seasonal Discounts</a></li>
+                    </ul>
+                </div>
+
+                <!-- Legal / Hours -->
+                <div>
+                    <h4 class="text-white font-semibold text-sm mb-4">Hours</h4>
+                    <p class="text-xs text-cream/70">Mon - Sat: 8:00 AM - 8:00 PM</p>
+                    <p class="text-xs text-cream/70 mt-1">Sun: 9:00 AM - 6:00 PM</p>
+                    <p class="text-xs text-warmGold mt-3"><i class="fa-solid fa-truck-fast mr-1"></i> Local Delivery Available</p>
+                </div>
+
+                <!-- Newsletter Signup -->
+                <div class="space-y-3">
+                    <h4 class="text-white font-semibold text-sm">Join Our Sweet Club</h4>
+                    <p class="text-xs text-cream/70">Subscribe for special promo codes and fresh recipe updates!</p>
+                    <form onsubmit="handleNewsletterSubmit(event)" class="flex items-center gap-2">
+                        <input type="email" placeholder="Your email..." required class="px-3 py-2 text-xs rounded-lg bg-cream/10 border border-white/20 text-white placeholder-cream/50 focus:outline-none focus:ring-1 focus:ring-warmGold w-full">
+                        <button type="submit" class="px-3 py-2 bg-warmGold hover:bg-amber-600 text-white rounded-lg text-xs font-semibold transition-colors">
+                            Join
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-cream/60">
+                <p>&copy; 2026 Sweet Delights Bakery. All rights reserved.</p>
+                <div class="flex items-center gap-4 text-base">
+                    <a href="#" class="hover:text-warmGold transition-colors"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" class="hover:text-warmGold transition-colors"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="#" class="hover:text-warmGold transition-colors"><i class="fa-brands fa-pinterest"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- SHOPPING CART MODAL -->
+    <div id="cart-modal" class="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm hidden flex justify-end">
+        <div class="w-full max-w-md bg-cream h-full shadow-2xl flex flex-col justify-between p-6 transform transition-transform duration-300">
+            <div>
+                <div class="flex items-center justify-between pb-4 border-b border-roseGold/20">
+                    <h3 class="font-serif text-xl font-bold text-chocoDark"><i class="fa-solid fa-basket-shopping text-warmGold mr-2"></i> Your Bakery Order</h3>
+                    <button onclick="toggleCartModal()" class="text-chocoDark/60 hover:text-chocoDark text-xl"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+
+                <!-- Cart Items Container -->
+                <div id="cart-items-container" class="py-4 space-y-4 max-h-[60vh] overflow-y-auto">
+                    <!-- Dynamic Cart Items -->
+                </div>
+            </div>
+
+            <div class="border-t border-roseGold/20 pt-4 space-y-4">
+                <div class="flex justify-between items-center font-bold text-chocoDark">
+                    <span>Subtotal:</span>
+                    <span id="cart-subtotal-price" class="text-xl text-warmGold font-serif">$0.00</span>
+                </div>
+                <button onclick="checkoutCart()" class="w-full py-3.5 bg-warmGold hover:bg-amber-600 text-white font-semibold rounded-xl shadow-md transition-all text-center">
+                    Proceed to Checkout
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- LIGHTBOX MODAL -->
+    <div id="lightbox-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-md hidden items-center justify-center p-4" onclick="closeLightbox()">
+        <div class="max-w-3xl w-full bg-transparent relative text-center" onclick="event.stopPropagation()">
+            <button onclick="closeLightbox()" class="absolute -top-10 right-0 text-white text-2xl hover:text-roseGold"><i class="fa-solid fa-xmark"></i></button>
+            <img id="lightbox-img" src="" alt="Zoomed view" class="w-full max-h-[80vh] object-contain rounded-2xl shadow-2xl">
+            <p id="lightbox-caption" class="text-cream text-base font-serif mt-4"></p>
+        </div>
+    </div>
+
+    <!-- NOTIFICATION TOAST -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 bg-chocoDark text-white px-5 py-3 rounded-xl shadow-xl flex items-center gap-3 transition-all duration-300 transform translate-y-20 opacity-0 pointer-events-none">
+        <i class="fa-solid fa-circle-check text-roseGold text-lg"></i>
+        <span id="toast-message" class="text-sm font-medium">Item added to cart!</span>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // Products Database
+        const products = [
+            {
+                id: 1,
+                name: 'Velvet Rose Layer Cake',
+                category: 'cakes',
+                price: 38.00,
+                rating: 5,
+                image: 'https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=600&q=80',
+                desc: 'Classic red velvet layers with rich cream cheese frosting and edible organic rose petals.'
+            },
+            {
+                id: 2,
+                name: 'Belgian Dark Fudge Cake',
+                category: 'cakes',
+                price: 42.00,
+                rating: 5,
+                image: 'https://images.unsplash.com/photo-1588195538326-c5b1e9f80a1b?auto=format&fit=crop&w=600&q=80',
+                desc: 'Decadent 70% dark chocolate sponge glazed with smooth dark ganache.'
+            },
+            {
+                id: 3,
+                name: 'Artisan Butter Croissants (Set of 4)',
+                category: 'pastries',
+                price: 14.00,
+                rating: 4.8,
+                image: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=600&q=80',
+                desc: 'Flaky, golden French butter croissants baked fresh every morning.'
+            },
+            {
+                id: 4,
+                name: 'Gourmet Choco-Chip Cookies (6pcs)',
+                category: 'cookies',
+                price: 12.00,
+                rating: 4.9,
+                image: 'https://images.unsplash.com/photo-1499636136210-6f4ee915583e?auto=format&fit=crop&w=600&q=80',
+                desc: 'Soft-baked cookies with melted chocolate chunks and a hint of sea salt.'
+            },
+            {
+                id: 5,
+                name: 'Strawberry Custard Tart',
+                category: 'pastries',
+                price: 8.50,
+                rating: 4.7,
+                image: 'https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?auto=format&fit=crop&w=600&q=80',
+                desc: 'Crisp pastry shell filled with vanilla bean pastry cream & fresh strawberries.'
+            },
+            {
+                id: 6,
+                name: 'Pistachio Macaron Box (8pcs)',
+                category: 'cookies',
+                price: 18.00,
+                rating: 5,
+                image: 'https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&w=600&q=80',
+                desc: 'Delicate almond meringue shells filled with rich pistachio buttercream.'
+            }
+        ];
+
+        // Shopping Cart State
+        let cart = [];
+
+        // DOM Loaded Init
+        window.onload = function() {
+            renderProducts(products);
+            calculateCakeEstimate();
+            startCountdown();
+        };
+
+        // Render Product Cards
+        function renderProducts(items) {
+            const grid = document.getElementById('product-grid');
+            grid.innerHTML = '';
+
+            items.forEach(product => {
+                const card = document.createElement('div');
+                card.className = 'bg-white rounded-2xl overflow-hidden border border-roseGold/20 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group';
+                
+                // Stars
+                const stars = Array(Math.floor(product.rating)).fill('<i class="fa-solid fa-star text-warmGold text-xs"></i>').join('');
+
+                card.innerHTML = `
+                    <div>
+                        <div class="relative h-56 overflow-hidden bg-pastelPink/30">
+                            <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <span class="absolute top-3 right-3 bg-cream/90 backdrop-blur-md px-3 py-1 rounded-full text-xs font-bold text-chocoDark shadow-sm uppercase tracking-wider">
+                                ${product.category}
+                            </span>
+                        </div>
+                        <div class="p-5">
+                            <div class="flex items-center gap-1 mb-1">
+                                ${stars}
+                                <span class="text-xs text-chocoDark/60 font-semibold ml-1">${product.rating}</span>
+                            </div>
+                            <h3 class="font-serif text-lg font-bold text-chocoDark group-hover:text-warmGold transition-colors">${product.name}</h3>
+                            <p class="text-xs text-chocoDark/70 mt-2 line-clamp-2">${product.desc}</p>
+                        </div>
+                    </div>
+                    <div class="p-5 pt-0 flex items-center justify-between border-t border-cream mt-2">
+                        <span class="text-xl font-bold font-serif text-warmGold">$${product.price.toFixed(2)}</span>
+                        <button onclick="addToCart(${product.id})" class="px-4 py-2 bg-pastelPink hover:bg-roseGold hover:text-white text-chocoDark text-xs font-semibold rounded-xl transition-all flex items-center gap-2">
+                            <i class="fa-solid fa-plus"></i> Add to Cart
+                        </button>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // Filter Menu Tabs
+        function filterMenu(category) {
+            // Tab highlight switching
+            document.querySelectorAll('.menu-tab').forEach(tab => {
+                tab.classList.remove('bg-chocoDark', 'text-white', 'shadow-md');
+                tab.classList.add('bg-pastelPink/60', 'text-chocoDark');
+            });
+
+            const activeTab = document.getElementById(`tab-${category}`);
+            if(activeTab) {
+                activeTab.classList.remove('bg-pastelPink/60', 'text-chocoDark');
+                activeTab.classList.add('bg-chocoDark', 'text-white', 'shadow-md');
+            }
+
+            if(category === 'all') {
+                renderProducts(products);
+            } else {
+                const filtered = products.filter(p => p.category === category);
+                renderProducts(filtered);
+            }
+        }
+
+        // Add to Cart
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            if(!product) return;
+
+            const existingItem = cart.find(item => item.id === productId);
+            if(existingItem) {
+                existingItem.qty += 1;
+            } else {
+                cart.push({ ...product, qty: 1 });
+            }
+
+            updateCartUI();
+            showToast(`Added ${product.name} to your cart!`);
+        }
+
+        // Update Cart UI
+        function updateCartUI() {
+            const badge = document.getElementById('cart-badge');
+            const totalQty = cart.reduce((acc, item) => acc + item.qty, 0);
+            badge.innerText = totalQty;
+
+            const container = document.getElementById('cart-items-container');
+            container.innerHTML = '';
+
+            let subtotal = 0;
+
+            if(cart.length === 0) {
+                container.innerHTML = `<p class="text-center text-sm text-chocoDark/60 py-8">Your shopping basket is empty.</p>`;
+            } else {
+                cart.forEach(item => {
+                    subtotal += item.price * item.qty;
+                    const itemEl = document.createElement('div');
+                    itemEl.className = 'flex items-center justify-between p-3 bg-white rounded-xl border border-roseGold/20 shadow-sm';
+                    itemEl.innerHTML = `
+                        <div class="flex items-center gap-3">
+                            <img src="${item.image}" alt="${item.name}" class="w-12 h-12 rounded-lg object-cover">
+                            <div>
+                                <h4 class="text-xs font-bold text-chocoDark">${item.name}</h4>
+                                <span class="text-xs text-warmGold font-semibold">$${item.price.toFixed(2)}</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <button onclick="changeQty(${item.id}, -1)" class="w-6 h-6 rounded-md bg-pastelPink text-chocoDark text-xs font-bold">-</button>
+                            <span class="text-xs font-semibold text-chocoDark">${item.qty}</span>
+                            <button onclick="changeQty(${item.id}, 1)" class="w-6 h-6 rounded-md bg-pastelPink text-chocoDark text-xs font-bold">+</button>
+                        </div>
+                    `;
+                    container.appendChild(itemEl);
+                });
+            }
+
+            document.getElementById('cart-subtotal-price').innerText = `$${subtotal.toFixed(2)}`;
+        }
+
+        function changeQty(id, delta) {
+            const item = cart.find(i => i.id === id);
+            if(item) {
+                item.qty += delta;
+                if(item.qty <= 0) {
+                    cart = cart.filter(i => i.id !== id);
+                }
+            }
+            updateCartUI();
+        }
+
+        function toggleCartModal() {
+            const modal = document.getElementById('cart-modal');
+            modal.classList.toggle('hidden');
+        }
+
+        function checkoutCart() {
+            if(cart.length === 0) {
+                showToast("Your cart is empty!");
+                return;
+            }
+            showToast("Order placed successfully! We'll deliver soon.");
+            cart = [];
+            updateCartUI();
+            toggleCartModal();
+        }
+
+        // Custom Cake Quote Calculator
+        function calculateCakeEstimate() {
+            const spongeSelect = document.getElementById('cake-sponge');
+            const fillingSelect = document.getElementById('cake-filling');
+            const sizeSelect = document.getElementById('cake-size');
+            const tiersSelect = document.getElementById('cake-tiers');
+
+            const spongePrice = parseFloat(spongeSelect.options[spongeSelect.selectedIndex].dataset.price || 25);
+            const fillingPrice = parseFloat(fillingSelect.options[fillingSelect.selectedIndex].dataset.price || 10);
+            const sizeMultiplier = parseFloat(sizeSelect.options[sizeSelect.selectedIndex].dataset.mult || 1);
+            const tiersPrice = parseFloat(tiersSelect.options[tiersSelect.selectedIndex].dataset.price || 0);
+
+            let total = (spongePrice + fillingPrice) * sizeMultiplier + tiersPrice;
+
+            if(document.getElementById('diet-eggless').checked) total += 5;
+            if(document.getElementById('diet-glutenfree').checked) total += 8;
+            if(document.getElementById('diet-vegan').checked) total += 10;
+
+            document.getElementById('custom-price').innerText = `$${total.toFixed(2)}`;
+        }
+
+        function handleCustomCakeSubmit(e) {
+            e.preventDefault();
+            const estPrice = document.getElementById('custom-price').innerText;
+            showToast(`Quote requested for ${estPrice}! We will email you details.`);
+            e.target.reset();
+            calculateCakeEstimate();
+        }
+
+        // Contact & Newsletter forms
+        function handleContactSubmit(e) {
+            e.preventDefault();
+            showToast("Thank you! Your message has been sent.");
+            e.target.reset();
+        }
+
+        function handleNewsletterSubmit(e) {
+            e.preventDefault();
+            showToast("Welcome to Sweet Club! Promo code sent.");
+            e.target.reset();
+        }
+
+        function copyPromoCode(code) {
+            const tempInput = document.createElement('input');
+            tempInput.value = code;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+            showToast(`Promo Code ${code} copied to clipboard!`);
+        }
+
+        function applyOfferPromo(code) {
+            showToast(`Applied code ${code}! 20% OFF will reflect at checkout.`);
+        }
+
+        // Lightbox Handler
+        function openLightbox(imgSrc, caption) {
+            document.getElementById('lightbox-img').src = imgSrc;
+            document.getElementById('lightbox-caption').innerText = caption;
+            const modal = document.getElementById('lightbox-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeLightbox() {
+            const modal = document.getElementById('lightbox-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        // Toast Notification
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-message').innerText = message;
+            toast.classList.remove('translate-y-20', 'opacity-0', 'pointer-events-none');
+            
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0', 'pointer-events-none');
+            }, 3000);
+        }
+
+        // Mobile Nav Drawer Toggle
+        function toggleMobileNav() {
+            const nav = document.getElementById('mobile-nav');
+            nav.classList.toggle('hidden');
+        }
+
+        // Offer Countdown Timer
+        function startCountdown() {
+            let days = 2, hours = 14, mins = 38, secs = 45;
+
+            setInterval(() => {
+                secs--;
+                if(secs < 0) { secs = 59; mins--; }
+                if(mins < 0) { mins = 59; hours--; }
+                if(hours < 0) { hours = 23; days--; }
+
+                document.getElementById('timer-days').innerText = days < 10 ? '0' + days : days;
+                document.getElementById('timer-hours').innerText = hours < 10 ? '0' + hours : hours;
+                document.getElementById('timer-mins').innerText = mins < 10 ? '0' + mins : mins;
+                document.getElementById('timer-secs').innerText = secs < 10 ? '0' + secs : secs;
+            }, 1000);
+        }
+    </script>
+</body>
+</html>

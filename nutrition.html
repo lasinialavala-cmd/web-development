@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NutriLife | Pure Health & Nourishing Recipes</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        emeraldDark: '#064E3B',
+                        emeraldPrimary: '#059669',
+                        emeraldLight: '#D1FAE5',
+                        sage: '#ECFDF5',
+                        warmSand: '#FFFBEB',
+                        accentOrange: '#F97316',
+                        textDark: '#1F2937'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts & FontAwesome Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #F9FAFB; color: #1F2937; }
+        .hero-bg {
+            background: linear-gradient(rgba(6, 78, 59, 0.65), rgba(6, 78, 59, 0.8)), url('https://images.unsplash.com/photo-1498837167922-ddd27525d352?auto=format&fit=crop&w=1920&q=80') center/cover no-repeat;
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #F3F4F6; }
+        ::-webkit-scrollbar-thumb { background: #10B981; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #059669; }
+    </style>
+</head>
+<body class="antialiased selection:bg-emeraldLight selection:text-emeraldDark">
+
+    <!-- HEADER / NAVIGATION -->
+    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-emerald-100 shadow-sm transition-all duration-300" id="main-header">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <a href="#" class="flex items-center gap-3 group">
+                    <div class="w-12 h-12 rounded-full bg-emeraldLight flex items-center justify-center text-emeraldDark group-hover:scale-105 transition-transform shadow-inner">
+                        <i class="fa-solid fa-leaf text-2xl text-emeraldPrimary"></i>
+                    </div>
+                    <div>
+                        <span class="font-serif text-2xl font-bold tracking-tight text-emeraldDark block leading-none">NutriLife</span>
+                        <span class="text-xs uppercase tracking-widest text-emeraldPrimary font-semibold">Healthy & Nourishing</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Nav -->
+                <nav class="hidden md:flex items-center gap-8 font-medium text-sm text-textDark/80">
+                    <a href="#home" class="hover:text-emeraldPrimary transition-colors">Home</a>
+                    <a href="#recipes" class="hover:text-emeraldPrimary transition-colors">Recipes</a>
+                    <a href="#meal-plans" class="hover:text-emeraldPrimary transition-colors">Meal Plans</a>
+                    <a href="#macro-calculator" class="hover:text-emeraldPrimary transition-colors">Calorie Calculator</a>
+                    <a href="#tips" class="hover:text-emeraldPrimary transition-colors">Nutrition Tips</a>
+                    <a href="#contact" class="hover:text-emeraldPrimary transition-colors">Contact</a>
+                </nav>
+
+                <!-- Saved Recipes Button + Mobile Toggle -->
+                <div class="flex items-center gap-4">
+                    <button onclick="toggleSavedModal()" class="relative p-2.5 rounded-full bg-emeraldLight hover:bg-emerald-200 text-emeraldDark transition-all hover:scale-105 focus:outline-none">
+                        <i class="fa-solid fa-heart text-xl text-emeraldPrimary"></i>
+                        <span id="saved-badge" class="absolute -top-1 -right-1 bg-accentOrange text-white text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center shadow-md">0</span>
+                    </button>
+
+                    <!-- Mobile Menu Button -->
+                    <button id="mobile-menu-btn" onclick="toggleMobileNav()" class="md:hidden p-2 rounded-lg text-textDark hover:bg-emeraldLight focus:outline-none">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Drawer -->
+        <div id="mobile-nav" class="hidden md:hidden bg-white border-b border-emerald-100 px-4 pt-2 pb-6 space-y-3">
+            <a href="#home" onclick="toggleMobileNav()" class="block py-2 text-textDark font-medium hover:text-emeraldPrimary">Home</a>
+            <a href="#recipes" onclick="toggleMobileNav()" class="block py-2 text-textDark font-medium hover:text-emeraldPrimary">Recipes</a>
+            <a href="#meal-plans" onclick="toggleMobileNav()" class="block py-2 text-textDark font-medium hover:text-emeraldPrimary">Meal Plans</a>
+            <a href="#macro-calculator" onclick="toggleMobileNav()" class="block py-2 text-textDark font-medium hover:text-emeraldPrimary">Calorie Calculator</a>
+            <a href="#tips" onclick="toggleMobileNav()" class="block py-2 text-textDark font-medium hover:text-emeraldPrimary">Nutrition Tips</a>
+            <a href="#contact" onclick="toggleMobileNav()" class="block py-2 text-textDark font-medium hover:text-emeraldPrimary">Contact</a>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section id="home" class="hero-bg min-h-[85vh] flex items-center justify-center text-center px-4 relative overflow-hidden">
+        <div class="max-w-3xl mx-auto text-white space-y-6 py-12">
+            <span class="inline-block px-4 py-1.5 rounded-full bg-emeraldLight/20 backdrop-blur-md text-emeraldLight font-medium text-sm tracking-wider uppercase border border-emeraldLight/30 animate-pulse">
+                Clean Eating & Expert Nutrition Guidance
+            </span>
+            <h1 class="font-serif text-4xl sm:text-6xl lg:text-7xl font-bold leading-tight drop-shadow-md">
+                Nourish Your Body, Elevate Your Life
+            </h1>
+            <p class="text-lg sm:text-xl text-white/90 max-w-2xl mx-auto font-light leading-relaxed">
+                Discover delicious chef-crafted healthy recipes, customized meal plans, and detailed macronutrient insights designed to support your wellness goals.
+            </p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+                <a href="#recipes" class="w-full sm:w-auto px-8 py-4 bg-emeraldPrimary hover:bg-emerald-700 text-white font-semibold rounded-full shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5 text-center">
+                    <i class="fa-solid fa-utensils mr-2"></i> Explore Recipes
+                </a>
+                <a href="#macro-calculator" class="w-full sm:w-auto px-8 py-4 bg-white/20 backdrop-blur-md hover:bg-white/30 text-white border border-white/40 font-semibold rounded-full transition-all text-center">
+                    <i class="fa-solid fa-calculator mr-2"></i> Calorie Calculator
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- HEALTHY CATEGORIES & RECIPES SECTION -->
+    <section id="recipes" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div class="text-center max-w-2xl mx-auto mb-12">
+            <span class="text-emeraldPrimary uppercase font-semibold text-xs tracking-widest">Wholesome Selections</span>
+            <h2 class="font-serif text-3xl sm:text-4xl font-bold text-emeraldDark mt-1">Nutritious Recipe Collection</h2>
+            <div class="w-16 h-1 bg-emeraldPrimary mx-auto mt-4 rounded-full"></div>
+        </div>
+
+        <!-- Filter Tabs -->
+        <div class="flex flex-wrap justify-center gap-2 sm:gap-4 mb-10">
+            <button onclick="filterRecipes('all')" id="tab-all" class="recipe-tab active px-6 py-2.5 rounded-full font-medium text-sm transition-all bg-emeraldDark text-white shadow-md">All Categories</button>
+            <button onclick="filterRecipes('breakfast')" id="tab-breakfast" class="recipe-tab px-6 py-2.5 rounded-full font-medium text-sm transition-all bg-emeraldLight text-emeraldDark hover:bg-emerald-200">Breakfast</button>
+            <button onclick="filterRecipes('bowls')" id="tab-bowls" class="recipe-tab px-6 py-2.5 rounded-full font-medium text-sm transition-all bg-emeraldLight text-emeraldDark hover:bg-emerald-200">Power Bowls</button>
+            <button onclick="filterRecipes('keto')" id="tab-keto" class="recipe-tab px-6 py-2.5 rounded-full font-medium text-sm transition-all bg-emeraldLight text-emeraldDark hover:bg-emerald-200">Keto & Low Carb</button>
+            <button onclick="filterRecipes('smoothies')" id="tab-smoothies" class="recipe-tab px-6 py-2.5 rounded-full font-medium text-sm transition-all bg-emeraldLight text-emeraldDark hover:bg-emerald-200">Smoothies</button>
+        </div>
+
+        <!-- Recipes Grid -->
+        <div id="recipe-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Dynamic Injection of Recipes -->
+        </div>
+    </section>
+
+    <!-- MEAL PLANS SECTION -->
+    <section id="meal-plans" class="py-20 bg-sage border-y border-emerald-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <span class="text-emeraldPrimary uppercase font-semibold text-xs tracking-widest">Tailored Nutrition</span>
+                <h2 class="font-serif text-3xl sm:text-4xl font-bold text-emeraldDark mt-1">Structured Weekly Meal Plans</h2>
+                <p class="text-textDark/70 text-sm mt-2">Simplify your nutrition with expertly balanced daily meal programs designed for various health targets.</p>
+                <div class="w-16 h-1 bg-emeraldPrimary mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Plan 1 -->
+                <div class="bg-white rounded-3xl p-8 border border-emerald-100 shadow-md flex flex-col justify-between hover:shadow-xl transition-all">
+                    <div>
+                        <div class="w-14 h-14 rounded-2xl bg-emeraldLight flex items-center justify-center text-emeraldPrimary mb-6 text-2xl font-bold">
+                            <i class="fa-solid fa-weight-loss"></i>
+                        </div>
+                        <span class="text-xs font-semibold text-emeraldPrimary uppercase tracking-wider">Weight Management</span>
+                        <h3 class="font-serif text-2xl font-bold text-emeraldDark mt-1 mb-3">Balanced Lean Plan</h3>
+                        <p class="text-xs text-textDark/70 leading-relaxed mb-6">Designed to maintain deficit calorie intake with high fiber and moderate protein to keep you satiated throughout the day.</p>
+                        
+                        <div class="space-y-3 border-t border-gray-100 pt-4 text-xs">
+                            <div class="flex justify-between text-textDark"><span class="font-semibold">Avg. Daily Calories:</span> <span class="font-bold text-emeraldPrimary">1,500 - 1,700 kcal</span></div>
+                            <div class="flex justify-between text-textDark"><span class="font-semibold">Protein Intake:</span> <span>30% Macro Share</span></div>
+                            <div class="flex justify-between text-textDark"><span class="font-semibold">Carbs Intake:</span> <span>45% Macro Share</span></div>
+                            <div class="flex justify-between text-textDark"><span class="font-semibold">Healthy Fats:</span> <span>25% Macro Share</span></div>
+                        </div>
+                    </div>
+                    <button onclick="showToast('Balanced Lean Meal Plan PDF saved to downloads!')" class="w-full mt-8 py-3 bg-emeraldDark hover:bg-emerald-800 text-white rounded-xl font-semibold text-xs transition-colors shadow">
+                        Download Plan (PDF)
+                    </button>
+                </div>
+
+                <!-- Plan 2 -->
+                <div class="bg-white rounded-3xl p-8 border border-emerald-300 ring-2 ring-emeraldPrimary shadow-lg flex flex-col justify-between hover:shadow-xl transition-all relative">
+                    <span class="absolute -top-3.5 right-6 bg-emeraldPrimary text-white text-[10px] uppercase font-bold tracking-wider px-3 py-1 rounded-full shadow">Most Popular</span>
+                    <div>
+                        <div class="w-14 h-14 rounded-2xl bg-emeraldLight flex items-center justify-center text-emeraldPrimary mb-6 text-2xl font-bold">
+                            <i class="fa-solid fa-dumbbell"></i>
+                        </div>
+                        <span class="text-xs font-semibold text-emeraldPrimary uppercase tracking-wider">Fitness & Performance</span>
+                        <h3 class="font-serif text-2xl font-bold text-emeraldDark mt-1 mb-3">High Protein Athletic Plan</h3>
+                        <p class="text-xs text-textDark/70 leading-relaxed mb-6">Optimized for muscle recovery, strength building, and sustained energy for active individuals and athletes.</p>
+                        
+                        <div class="space-y-3 border-t border-gray-100 pt-4 text-xs">
+                            <div class="flex justify-between text-textDark"><span class="font-semibold">Avg. Daily Calories:</span> <span class="font-bold text-emeraldPrimary">2,200 - 2,500 kcal</span></div>
+                            <div class="flex justify-between text-textDark"><span class="font-semibold">Protein Intake:</span> <span>40% Macro Share</span></div>
+                            <div class="flex justify-between text-textDark"><span class="font-semibold">Carbs Intake:</span> <span>35% Macro Share</span></div>
+                            <div class="flex justify-between text-textDark"><span class="font-semibold">Healthy Fats:</span> <span>25% Macro Share</span></div>
+                        </div>
+                    </div>
+                    <button onclick="showToast('High Protein Athletic Meal Plan PDF saved!')" class="w-full mt-8 py-3 bg-emeraldPrimary hover:bg-emerald-700 text-white rounded-xl font-semibold text-xs transition-colors shadow">
+                        Download Plan (PDF)
+                    </button>
+                </div>
+
+                <!-- Plan 3 -->
+                <div class="bg-white rounded-3xl p-8 border border-emerald-100 shadow-md flex flex-col justify-between hover:shadow-xl transition-all">
+                    <div>
+                        <div class="w-14 h-14 rounded-2xl bg-emeraldLight flex items-center justify-center text-emeraldPrimary mb-6 text-2xl font-bold">
+                            <i class="fa-solid fa-seedling"></i>
+                        </div>
+                        <span class="text-xs font-semibold text-emeraldPrimary uppercase tracking-wider">Plant Power</span>
+                        <h3 class="font-serif text-2xl font-bold text-emeraldDark mt-1 mb-3">100% Vegan Vitality</h3>
+                        <p class="text-xs text-textDark/70 leading-relaxed mb-6">Nutrient-dense plant-based meals packed with whole grains, legumes, nuts, and fresh colorful veggies.</p>
+                        
+                        <div class="space-y-3 border-t border-gray-100 pt-4 text-xs">
+                            <div class="flex justify-between text-textDark"><span class="font-semibold">Avg. Daily Calories:</span> <span class="font-bold text-emeraldPrimary">1,800 - 2,000 kcal</span></div>
+                            <div class="flex justify-between text-textDark"><span class="font-semibold">Protein Intake:</span> <span>25% Macro Share</span></div>
+                            <div class="flex justify-between text-textDark"><span class="font-semibold">Carbs Intake:</span> <span>55% Macro Share</span></div>
+                            <div class="flex justify-between text-textDark"><span class="font-semibold">Healthy Fats:</span> <span>20% Macro Share</span></div>
+                        </div>
+                    </div>
+                    <button onclick="showToast('Vegan Vitality Meal Plan PDF saved to downloads!')" class="w-full mt-8 py-3 bg-emeraldDark hover:bg-emerald-800 text-white rounded-xl font-semibold text-xs transition-colors shadow">
+                        Download Plan (PDF)
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CALORIE & MACRO CALCULATOR -->
+    <section id="macro-calculator" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <!-- Information -->
+            <div class="lg:col-span-5 space-y-6">
+                <span class="text-emeraldPrimary uppercase font-semibold text-xs tracking-widest">Precision Nutrition</span>
+                <h2 class="font-serif text-3xl sm:text-4xl font-bold text-emeraldDark">Interactive Daily Calorie & Macro Estimator</h2>
+                <p class="text-textDark/80 leading-relaxed text-sm">
+                    Calculate your baseline daily caloric requirement (TDEE) and optimal macronutrient breakdown based on your personal traits and lifestyle goals.
+                </p>
+
+                <div class="space-y-4 pt-2">
+                    <div class="flex items-start gap-4 p-4 rounded-xl bg-white border border-emerald-100 shadow-sm">
+                        <div class="w-10 h-10 rounded-full bg-emeraldLight flex items-center justify-center text-emeraldPrimary font-bold shrink-0">1</div>
+                        <div>
+                            <h4 class="font-bold text-emeraldDark text-sm">Personalized TDEE</h4>
+                            <p class="text-xs text-textDark/70">Calculates Total Daily Energy Expenditure using standard Mifflin-St Jeor formulas.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4 p-4 rounded-xl bg-white border border-emerald-100 shadow-sm">
+                        <div class="w-10 h-10 rounded-full bg-emeraldLight flex items-center justify-center text-emeraldPrimary font-bold shrink-0">2</div>
+                        <div>
+                            <h4 class="font-bold text-emeraldDark text-sm">Target Split Insights</h4>
+                            <p class="text-xs text-textDark/70">Instantly splits daily targets into Proteins, Carbs, and Healthy Fats in grams.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Calculator Form -->
+            <div class="lg:col-span-7 bg-white p-6 sm:p-8 rounded-3xl shadow-xl border border-emerald-100">
+                <form id="calc-form" onsubmit="calculateMacros(event)" class="space-y-6">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-xs font-semibold text-emeraldDark mb-2">Age (years)</label>
+                            <input type="number" id="calc-age" required min="15" max="90" value="28" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-emeraldPrimary focus:border-emeraldPrimary text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-emeraldDark mb-2">Gender</label>
+                            <select id="calc-gender" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-emeraldPrimary focus:border-emeraldPrimary text-sm">
+                                <option value="female">Female</option>
+                                <option value="male">Male</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-emeraldDark mb-2">Weight (kg)</label>
+                            <input type="number" id="calc-weight" required min="30" max="200" value="68" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-emeraldPrimary focus:border-emeraldPrimary text-sm">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-emeraldDark mb-2">Height (cm)</label>
+                            <input type="number" id="calc-height" required min="120" max="220" value="170" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-emeraldPrimary focus:border-emeraldPrimary text-sm">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-xs font-semibold text-emeraldDark mb-2">Activity Level</label>
+                            <select id="calc-activity" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-emeraldPrimary focus:border-emeraldPrimary text-sm">
+                                <option value="1.2">Sedentary (Desk Job)</option>
+                                <option value="1.375">Lightly Active (1-3 days/wk)</option>
+                                <option value="1.55" selected>Moderately Active (3-5 days/wk)</option>
+                                <option value="1.725">Very Active (6-7 days/wk)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold text-emeraldDark mb-2">Primary Fitness Goal</label>
+                            <select id="calc-goal" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-emeraldPrimary focus:border-emeraldPrimary text-sm">
+                                <option value="lose">Weight Loss (-20% deficit)</option>
+                                <option value="maintain" selected>Maintain Weight</option>
+                                <option value="gain">Muscle Gain (+15% surplus)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="w-full py-3.5 bg-emeraldPrimary hover:bg-emerald-700 text-white font-semibold rounded-xl transition-all shadow-md">
+                        Calculate Daily Targets
+                    </button>
+                </form>
+
+                <!-- Results Output Box -->
+                <div id="calc-results" class="mt-6 p-6 rounded-2xl bg-emeraldLight/40 border border-emerald-200 hidden">
+                    <h4 class="text-xs uppercase font-bold text-emeraldDark tracking-wider mb-4">Your Estimated Daily Needs:</h4>
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
+                        <div class="bg-white p-3 rounded-xl border border-emerald-100">
+                            <span id="res-calories" class="block text-xl font-bold font-serif text-emeraldPrimary">2,100</span>
+                            <span class="text-[10px] uppercase text-textDark/60 font-semibold">Calories</span>
+                        </div>
+                        <div class="bg-white p-3 rounded-xl border border-emerald-100">
+                            <span id="res-protein" class="block text-xl font-bold font-serif text-emeraldDark">131g</span>
+                            <span class="text-[10px] uppercase text-textDark/60 font-semibold">Protein</span>
+                        </div>
+                        <div class="bg-white p-3 rounded-xl border border-emerald-100">
+                            <span id="res-carbs" class="block text-xl font-bold font-serif text-emeraldDark">236g</span>
+                            <span class="text-[10px] uppercase text-textDark/60 font-semibold">Carbs</span>
+                        </div>
+                        <div class="bg-white p-3 rounded-xl border border-emerald-100">
+                            <span id="res-fats" class="block text-xl font-bold font-serif text-emeraldDark">70g</span>
+                            <span class="text-[10px] uppercase text-textDark/60 font-semibold">Healthy Fats</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NUTRITION TIPS & ARTICLES -->
+    <section id="tips" class="py-20 bg-emeraldDark text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <span class="text-emeraldLight uppercase font-semibold text-xs tracking-widest">Evidence-Based Insights</span>
+                <h2 class="font-serif text-3xl sm:text-4xl font-bold text-white mt-1">Healthy Eating Tips</h2>
+                <div class="w-16 h-1 bg-emeraldLight mx-auto mt-4 rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Tip Card 1 -->
+                <div class="bg-emerald-900/50 p-6 rounded-2xl border border-emerald-700/50 space-y-4">
+                    <div class="w-12 h-12 rounded-xl bg-emeraldLight/20 text-emeraldLight flex items-center justify-center text-xl font-bold">
+                        <i class="fa-solid fa-bottle-water"></i>
+                    </div>
+                    <h3 class="font-serif text-xl font-bold text-white">Prioritize Hydration</h3>
+                    <p class="text-xs text-white/80 leading-relaxed">
+                        Drinking adequate water boosts metabolism, aids digestion, and prevents overeating disguised as thirst. Aim for at least 2.5–3 liters daily.
+                    </p>
+                </div>
+
+                <!-- Tip Card 2 -->
+                <div class="bg-emerald-900/50 p-6 rounded-2xl border border-emerald-700/50 space-y-4">
+                    <div class="w-12 h-12 rounded-xl bg-emeraldLight/20 text-emeraldLight flex items-center justify-center text-xl font-bold">
+                        <i class="fa-solid fa-plate-wheat"></i>
+                    </div>
+                    <h3 class="font-serif text-xl font-bold text-white">The Plate Method</h3>
+                    <p class="text-xs text-white/80 leading-relaxed">
+                        Fill half your plate with non-starchy vegetables, one-quarter with lean protein, and one-quarter with complex whole grains for natural balance.
+                    </p>
+                </div>
+
+                <!-- Tip Card 3 -->
+                <div class="bg-emerald-900/50 p-6 rounded-2xl border border-emerald-700/50 space-y-4">
+                    <div class="w-12 h-12 rounded-xl bg-emeraldLight/20 text-emeraldLight flex items-center justify-center text-xl font-bold">
+                        <i class="fa-solid fa-apple-whole"></i>
+                    </div>
+                    <h3 class="font-serif text-xl font-bold text-white">Embrace Whole Foods</h3>
+                    <p class="text-xs text-white/80 leading-relaxed">
+                        Reduce ultra-processed ingredients laden with hidden sugars. Choose whole, single-ingredient foods to maximize vital micronutrients.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT & NEWSLETTER -->
+    <section id="contact" class="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div class="bg-gradient-to-br from-white to-sage rounded-3xl p-8 sm:p-12 border border-emerald-100 shadow-xl">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                <div class="lg:col-span-6 space-y-4">
+                    <span class="text-emeraldPrimary uppercase font-semibold text-xs tracking-widest">Join NutriLife Club</span>
+                    <h2 class="font-serif text-3xl sm:text-4xl font-bold text-emeraldDark">Get Weekly Fresh Recipes & Meal Guides</h2>
+                    <p class="text-textDark/70 text-sm leading-relaxed">
+                        Subscribe to receive clean-eating meal inspirations, seasonal dietary advice, and exclusive healthy cooking tips straight to your inbox.
+                    </p>
+                </div>
+
+                <div class="lg:col-span-6">
+                    <form onsubmit="handleNewsletterSubmit(event)" class="space-y-4">
+                        <div class="flex flex-col sm:flex-row gap-3">
+                            <input type="email" required placeholder="Enter your email address..." class="w-full px-5 py-3.5 rounded-xl border border-gray-200 focus:ring-2 focus:ring-emeraldPrimary focus:border-emeraldPrimary text-sm bg-white">
+                            <button type="submit" class="px-8 py-3.5 bg-emeraldPrimary hover:bg-emerald-700 text-white font-semibold rounded-xl text-sm transition-all shadow-md shrink-0">
+                                Subscribe Now
+                            </button>
+                        </div>
+                        <p class="text-[11px] text-textDark/50">We respect your privacy. Unsubscribe anytime with one click.</p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-emeraldDark text-white/80 py-12 border-t border-emerald-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+                <!-- Brand -->
+                <div class="space-y-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-full bg-emeraldLight flex items-center justify-center text-emeraldDark">
+                            <i class="fa-solid fa-leaf text-lg text-emeraldPrimary"></i>
+                        </div>
+                        <span class="font-serif text-xl font-bold text-white">NutriLife</span>
+                    </div>
+                    <p class="text-xs text-white/70 leading-relaxed">
+                        Dedicated to empowering healthier lifestyles through clean eating, mindful nutrition, and wholesome chef-crafted recipes.
+                    </p>
+                </div>
+
+                <!-- Links -->
+                <div>
+                    <h4 class="text-white font-semibold text-sm mb-4">Quick Navigation</h4>
+                    <ul class="space-y-2 text-xs">
+                        <li><a href="#home" class="hover:text-emeraldLight transition-colors">Home</a></li>
+                        <li><a href="#recipes" class="hover:text-emeraldLight transition-colors">Nutritious Recipes</a></li>
+                        <li><a href="#meal-plans" class="hover:text-emeraldLight transition-colors">Weekly Meal Plans</a></li>
+                        <li><a href="#macro-calculator" class="hover:text-emeraldLight transition-colors">Calorie Estimator</a></li>
+                    </ul>
+                </div>
+
+                <!-- Info -->
+                <div>
+                    <h4 class="text-white font-semibold text-sm mb-4">Wellness Focus</h4>
+                    <p class="text-xs text-white/70">Whole-Food Plant-Based</p>
+                    <p class="text-xs text-white/70 mt-1">Balanced Macro Ratios</p>
+                    <p class="text-xs text-emeraldLight mt-3"><i class="fa-solid fa-shield-heart mr-1"></i> Verified by Dietitians</p>
+                </div>
+
+                <!-- Socials -->
+                <div class="space-y-3">
+                    <h4 class="text-white font-semibold text-sm">Follow NutriLife</h4>
+                    <div class="flex items-center gap-4 text-lg">
+                        <a href="#" class="hover:text-emeraldLight transition-colors"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#" class="hover:text-emeraldLight transition-colors"><i class="fa-brands fa-facebook"></i></a>
+                        <a href="#" class="hover:text-emeraldLight transition-colors"><i class="fa-brands fa-pinterest"></i></a>
+                        <a href="#" class="hover:text-emeraldLight transition-colors"><i class="fa-brands fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/60">
+                <p>&copy; 2026 NutriLife Health & Wellness. All rights reserved.</p>
+                <p>Designed for healthy living.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- RECIPE DETAIL MODAL -->
+    <div id="recipe-modal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm hidden items-center justify-center p-4 overflow-y-auto">
+        <div class="bg-white max-w-2xl w-full rounded-3xl shadow-2xl overflow-hidden relative max-h-[90vh] flex flex-col">
+            <div class="relative h-64 sm:h-72 shrink-0">
+                <img id="modal-img" src="" alt="Recipe image" class="w-full h-full object-cover">
+                <button onclick="closeRecipeModal()" class="absolute top-4 right-4 bg-black/50 hover:bg-black/80 text-white w-10 h-10 rounded-full flex items-center justify-center transition-colors">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+
+            <div class="p-6 sm:p-8 overflow-y-auto space-y-6">
+                <div>
+                    <div class="flex items-center justify-between gap-4 mb-2">
+                        <span id="modal-category" class="bg-emeraldLight text-emeraldDark text-xs uppercase font-bold px-3 py-1 rounded-full tracking-wider"></span>
+                        <div class="flex items-center gap-3 text-xs text-textDark/70">
+                            <span><i class="fa-solid fa-clock text-emeraldPrimary mr-1"></i> <span id="modal-time"></span></span>
+                            <span><i class="fa-solid fa-fire text-accentOrange mr-1"></i> <span id="modal-calories"></span></span>
+                        </div>
+                    </div>
+                    <h3 id="modal-title" class="font-serif text-2xl sm:text-3xl font-bold text-emeraldDark"></h3>
+                    <p id="modal-desc" class="text-xs text-textDark/70 mt-2 leading-relaxed"></p>
+                </div>
+
+                <!-- Macros Breakdown -->
+                <div class="p-4 rounded-2xl bg-sage border border-emerald-100 grid grid-cols-3 gap-4 text-center">
+                    <div>
+                        <span id="modal-protein" class="block font-bold text-emeraldDark text-sm"></span>
+                        <span class="text-[10px] text-textDark/60 font-semibold uppercase">Protein</span>
+                    </div>
+                    <div>
+                        <span id="modal-carbs" class="block font-bold text-emeraldDark text-sm"></span>
+                        <span class="text-[10px] text-textDark/60 font-semibold uppercase">Carbs</span>
+                    </div>
+                    <div>
+                        <span id="modal-fat" class="block font-bold text-emeraldDark text-sm"></span>
+                        <span class="text-[10px] text-textDark/60 font-semibold uppercase">Fats</span>
+                    </div>
+                </div>
+
+                <!-- Ingredients & Steps -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <div>
+                        <h4 class="font-bold text-emeraldDark text-sm mb-3 flex items-center gap-2"><i class="fa-solid fa-basket-shopping text-emeraldPrimary"></i> Ingredients:</h4>
+                        <ul id="modal-ingredients" class="space-y-1.5 text-xs text-textDark/80 list-disc list-inside"></ul>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-emeraldDark text-sm mb-3 flex items-center gap-2"><i class="fa-solid fa-list-check text-emeraldPrimary"></i> Preparation Highlights:</h4>
+                        <ol id="modal-steps" class="space-y-1.5 text-xs text-textDark/80 list-decimal list-inside"></ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SAVED RECIPES MODAL -->
+    <div id="saved-modal" class="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm hidden flex justify-end">
+        <div class="w-full max-w-md bg-white h-full shadow-2xl flex flex-col justify-between p-6 transform transition-transform duration-300">
+            <div>
+                <div class="flex items-center justify-between pb-4 border-b border-emerald-100">
+                    <h3 class="font-serif text-xl font-bold text-emeraldDark"><i class="fa-solid fa-heart text-accentOrange mr-2"></i> Saved Favorites</h3>
+                    <button onclick="toggleSavedModal()" class="text-textDark/60 hover:text-textDark text-xl"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+
+                <!-- Saved Items Container -->
+                <div id="saved-items-container" class="py-4 space-y-4 max-h-[70vh] overflow-y-auto">
+                    <!-- Dynamic Items -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- NOTIFICATION TOAST -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 bg-emeraldDark text-white px-5 py-3 rounded-xl shadow-xl flex items-center gap-3 transition-all duration-300 transform translate-y-20 opacity-0 pointer-events-none">
+        <i class="fa-solid fa-circle-check text-emeraldLight text-lg"></i>
+        <span id="toast-message" class="text-sm font-medium">Notification message</span>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // Recipes Database
+        const recipes = [
+            {
+                id: 1,
+                name: 'Avocado & Quinoa Power Bowl',
+                category: 'bowls',
+                calories: '420 kcal',
+                time: '15 mins',
+                protein: '16g',
+                carbs: '48g',
+                fat: '18g',
+                image: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=600&q=80',
+                desc: 'A vibrant nourish bowl packed with fluffy quinoa, ripe avocado slices, roasted chickpeas, and tahini lemon dressing.',
+                ingredients: [
+                    '1 cup cooked fluffy quinoa',
+                    '1/2 ripe Hass avocado, sliced',
+                    '1/2 cup roasted chickpeas',
+                    '1 cup mixed leafy greens',
+                    '2 tbsp tahini dressing'
+                ],
+                steps: [
+                    'Base the bowl with fresh mixed greens and cooked quinoa.',
+                    'Arrange sliced avocado and crispy roasted chickpeas on top.',
+                    'Drizzle with rich tahini lemon dressing before serving.'
+                ]
+            },
+            {
+                id: 2,
+                name: 'Wild Salmon with Asparagus',
+                category: 'keto',
+                calories: '510 kcal',
+                time: '20 mins',
+                protein: '42g',
+                carbs: '8g',
+                fat: '32g',
+                image: 'https://images.unsplash.com/photo-1467003909585-2f8a72700288?auto=format&fit=crop&w=600&q=80',
+                desc: 'Pan-seared wild salmon fillet enriched with garlic herb olive oil alongside tender grilled asparagus spears.',
+                ingredients: [
+                    '200g wild salmon fillet',
+                    '1 bundle fresh asparagus',
+                    '1 tbsp extra virgin olive oil',
+                    '1 clove minced garlic',
+                    'Fresh lemon slices & dill'
+                ],
+                steps: [
+                    'Season salmon with salt, pepper, and garlic.',
+                    'Sear salmon fillet in olive oil for 4 minutes each side.',
+                    'Sauté asparagus in the same pan until tender-crisp.'
+                ]
+            },
+            {
+                id: 3,
+                name: 'Berry Spirulina Protein Smoothie',
+                category: 'smoothies',
+                calories: '280 kcal',
+                time: '5 mins',
+                protein: '24g',
+                carbs: '32g',
+                fat: '4g',
+                image: 'https://images.unsplash.com/photo-1553530666-ba11a7da3888?auto=format&fit=crop&w=600&q=80',
+                desc: 'Antioxidant-dense smoothie blending blueberries, organic spirulina, plant protein powder, and unsweetened almond milk.',
+                ingredients: [
+                    '1 cup frozen blueberries',
+                    '1 scoop plant protein powder',
+                    '1 tsp organic blue/green spirulina',
+                    '1 cup unsweetened almond milk',
+                    '1 tbsp chia seeds'
+                ],
+                steps: [
+                    'Combine all ingredients into a high-speed blender.',
+                    'Blend on high for 60 seconds until creamy and vibrant.',
+                    'Pour into a chilled glass and top with chia seeds.'
+                ]
+            },
+            {
+                id: 4,
+                name: 'Overnight Chia Seed Pudding',
+                category: 'breakfast',
+                calories: '310 kcal',
+                time: '10 mins + night',
+                protein: '11g',
+                carbs: '34g',
+                fat: '14g',
+                image: 'https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?auto=format&fit=crop&w=600&q=80',
+                desc: 'Creamy chia pudding soaked overnight in coconut milk, layered with fresh raspberries and toasted almonds.',
+                ingredients: [
+                    '3 tbsp organic chia seeds',
+                    '1 cup light coconut milk',
+                    '1/2 tsp vanilla extract',
+                    '1/2 cup fresh raspberries',
+                    '1 tbsp sliced toasted almonds'
+                ],
+                steps: [
+                    'Whisk chia seeds, coconut milk, and vanilla in a jar.',
+                    'Refrigerate overnight (or at least 4 hours) to thicken.',
+                    'Top with fresh raspberries and crunchy almonds.'
+                ]
+            },
+            {
+                id: 5,
+                name: 'Mediterranean Chickpea Salad',
+                category: 'bowls',
+                calories: '360 kcal',
+                time: '12 mins',
+                protein: '14g',
+                carbs: '42g',
+                fat: '15g',
+                image: 'https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=600&q=80',
+                desc: 'Refreshing Mediterranean salad with crisp cucumbers, cherry tomatoes, Kalamata olives, chickpeas, and lemon vinaigrette.',
+                ingredients: [
+                    '1 can drained chickpeas',
+                    '1 cup diced English cucumber',
+                    '1 cup cherry tomatoes, halved',
+                    '1/4 cup Kalamata olives',
+                    'Fresh parsley & lemon vinaigrette'
+                ],
+                steps: [
+                    'Combine chickpeas, cucumber, tomatoes, and olives in a bowl.',
+                    'Toss thoroughly with lemon vinaigrette and fresh herbs.',
+                    'Serve chilled for maximum crispness.'
+                ]
+            },
+            {
+                id: 6,
+                name: 'Keto Spinach & Fetta Omelet',
+                category: 'breakfast',
+                calories: '380 kcal',
+                time: '10 mins',
+                protein: '22g',
+                carbs: '4g',
+                fat: '29g',
+                image: 'https://images.unsplash.com/photo-1525351484163-7529414344d8?auto=format&fit=crop&w=600&q=80',
+                desc: 'Fluffy farm-fresh egg omelet filled with wilted baby spinach and crumbled Mediterranean feta cheese.',
+                ingredients: [
+                    '3 organic pasture-raised eggs',
+                    '1 cup baby spinach',
+                    '30g crumbled feta cheese',
+                    '1 tbsp grass-fed butter',
+                    'Pinch of black pepper'
+                ],
+                steps: [
+                    'Whisk eggs thoroughly with salt and pepper.',
+                    'Melt butter in skillet, add spinach until wilted.',
+                    'Pour eggs over, sprinkle feta, fold and cook until set.'
+                ]
+            }
+        ];
+
+        // State
+        let savedRecipeIds = [];
+
+        // On Load Initializer
+        window.onload = function() {
+            renderRecipes(recipes);
+        };
+
+        // Render Recipe Cards
+        function renderRecipes(items) {
+            const grid = document.getElementById('recipe-grid');
+            grid.innerHTML = '';
+
+            items.forEach(item => {
+                const isSaved = savedRecipeIds.includes(item.id);
+                const card = document.createElement('div');
+                card.className = 'bg-white rounded-3xl overflow-hidden border border-emerald-100 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between group';
+                
+                card.innerHTML = `
+                    <div>
+                        <div class="relative h-56 overflow-hidden bg-sage">
+                            <img src="${item.image}" alt="${item.name}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <span class="absolute top-3 left-3 bg-white/90 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-bold text-emeraldDark shadow-sm uppercase tracking-wider">
+                                ${item.category}
+                            </span>
+                            <button onclick="toggleSaveRecipe(${item.id}, event)" class="absolute top-3 right-3 w-9 h-9 rounded-full ${isSaved ? 'bg-accentOrange text-white' : 'bg-white/80 text-textDark hover:bg-white'} backdrop-blur-md flex items-center justify-center transition-all shadow-md">
+                                <i class="fa-solid fa-heart text-sm"></i>
+                            </button>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center gap-4 text-xs text-textDark/60 mb-2 font-medium">
+                                <span><i class="fa-solid fa-clock text-emeraldPrimary mr-1"></i> ${item.time}</span>
+                                <span><i class="fa-solid fa-fire text-accentOrange mr-1"></i> ${item.calories}</span>
+                            </div>
+                            <h3 class="font-serif text-xl font-bold text-emeraldDark group-hover:text-emeraldPrimary transition-colors">${item.name}</h3>
+                            <p class="text-xs text-textDark/70 mt-2 line-clamp-2 leading-relaxed">${item.desc}</p>
+                        </div>
+                    </div>
+                    <div class="p-6 pt-0 flex items-center justify-between border-t border-gray-50 mt-2">
+                        <div class="text-[11px] font-semibold text-emeraldDark">
+                            Protein: <span class="text-emeraldPrimary">${item.protein}</span>
+                        </div>
+                        <button onclick="openRecipeModal(${item.id})" class="px-4 py-2 bg-emeraldLight hover:bg-emerald-200 text-emeraldDark text-xs font-semibold rounded-xl transition-all">
+                            View Recipe
+                        </button>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // Filter Categories
+        function filterRecipes(category) {
+            document.querySelectorAll('.recipe-tab').forEach(tab => {
+                tab.classList.remove('bg-emeraldDark', 'text-white', 'shadow-md');
+                tab.classList.add('bg-emeraldLight', 'text-emeraldDark');
+            });
+
+            const activeTab = document.getElementById(`tab-${category}`);
+            if(activeTab) {
+                activeTab.classList.remove('bg-emeraldLight', 'text-emeraldDark');
+                activeTab.classList.add('bg-emeraldDark', 'text-white', 'shadow-md');
+            }
+
+            if(category === 'all') {
+                renderRecipes(recipes);
+            } else {
+                const filtered = recipes.filter(r => r.category === category);
+                renderRecipes(filtered);
+            }
+        }
+
+        // Recipe Modal Handlers
+        function openRecipeModal(id) {
+            const recipe = recipes.find(r => r.id === id);
+            if(!recipe) return;
+
+            document.getElementById('modal-img').src = recipe.image;
+            document.getElementById('modal-category').innerText = recipe.category;
+            document.getElementById('modal-time').innerText = recipe.time;
+            document.getElementById('modal-calories').innerText = recipe.calories;
+            document.getElementById('modal-title').innerText = recipe.name;
+            document.getElementById('modal-desc').innerText = recipe.desc;
+
+            document.getElementById('modal-protein').innerText = recipe.protein;
+            document.getElementById('modal-carbs').innerText = recipe.carbs;
+            document.getElementById('modal-fat').innerText = recipe.fat;
+
+            const ingList = document.getElementById('modal-ingredients');
+            ingList.innerHTML = recipe.ingredients.map(ing => `<li>${ing}</li>`).join('');
+
+            const stepList = document.getElementById('modal-steps');
+            stepList.innerHTML = recipe.steps.map(step => `<li>${step}</li>`).join('');
+
+            const modal = document.getElementById('recipe-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeRecipeModal() {
+            const modal = document.getElementById('recipe-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        // Save / Favorite Recipe Logic
+        function toggleSaveRecipe(id, event) {
+            if(event) event.stopPropagation();
+            
+            const index = savedRecipeIds.indexOf(id);
+            if(index === -1) {
+                savedRecipeIds.push(id);
+                showToast("Recipe added to your favorites!");
+            } else {
+                savedRecipeIds.splice(index, 1);
+                showToast("Recipe removed from favorites.");
+            }
+
+            document.getElementById('saved-badge').innerText = savedRecipeIds.length;
+            renderRecipes(recipes);
+            updateSavedUI();
+        }
+
+        function toggleSavedModal() {
+            const modal = document.getElementById('saved-modal');
+            modal.classList.toggle('hidden');
+        }
+
+        function updateSavedUI() {
+            const container = document.getElementById('saved-items-container');
+            container.innerHTML = '';
+
+            if(savedRecipeIds.length === 0) {
+                container.innerHTML = `<p class="text-center text-xs text-textDark/60 py-8">No saved recipes yet. Click the heart icon on recipes to save them!</p>`;
+                return;
+            }
+
+            savedRecipeIds.forEach(id => {
+                const recipe = recipes.find(r => r.id === id);
+                if(recipe) {
+                    const el = document.createElement('div');
+                    el.className = 'flex items-center justify-between p-3 bg-sage rounded-xl border border-emerald-100';
+                    el.innerHTML = `
+                        <div class="flex items-center gap-3">
+                            <img src="${recipe.image}" alt="${recipe.name}" class="w-12 h-12 rounded-lg object-cover">
+                            <div>
+                                <h4 class="text-xs font-bold text-emeraldDark">${recipe.name}</h4>
+                                <span class="text-[10px] text-emeraldPrimary font-semibold">${recipe.calories}</span>
+                            </div>
+                        </div>
+                        <button onclick="toggleSaveRecipe(${recipe.id})" class="text-red-500 hover:text-red-700 text-sm p-2"><i class="fa-solid fa-trash"></i></button>
+                    `;
+                    container.appendChild(el);
+                }
+            });
+        }
+
+        // Calorie & Macro Calculator Logic
+        function calculateMacros(e) {
+            e.preventDefault();
+
+            const age = parseFloat(document.getElementById('calc-age').value);
+            const gender = document.getElementById('calc-gender').value;
+            const weight = parseFloat(document.getElementById('calc-weight').value);
+            const height = parseFloat(document.getElementById('calc-height').value);
+            const activity = parseFloat(document.getElementById('calc-activity').value);
+            const goal = document.getElementById('calc-goal').value;
+
+            // BMR Calculation (Mifflin-St Jeor)
+            let bmr = (10 * weight) + (6.25 * height) - (5 * age);
+            bmr = gender === 'male' ? bmr + 5 : bmr - 161;
+
+            let tdee = bmr * activity;
+
+            // Adjust for goal
+            if(goal === 'lose') tdee *= 0.8;
+            else if(goal === 'gain') tdee *= 1.15;
+
+            const finalCalories = Math.round(tdee);
+
+            // Macros calculation (30% protein, 45% carbs, 25% fats)
+            const proteinGrams = Math.round((finalCalories * 0.25) / 4);
+            const carbsGrams = Math.round((finalCalories * 0.45) / 4);
+            const fatsGrams = Math.round((finalCalories * 0.30) / 9);
+
+            document.getElementById('res-calories').innerText = `${finalCalories.toLocaleString()}`;
+            document.getElementById('res-protein').innerText = `${proteinGrams}g`;
+            document.getElementById('res-carbs').innerText = `${carbsGrams}g`;
+            document.getElementById('res-fats').innerText = `${fatsGrams}g`;
+
+            document.getElementById('calc-results').classList.remove('hidden');
+        }
+
+        // Forms & Toast
+        function handleNewsletterSubmit(e) {
+            e.preventDefault();
+            showToast("Subscribed! Check your email for fresh guides.");
+            e.target.reset();
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-message').innerText = message;
+            toast.classList.remove('translate-y-20', 'opacity-0', 'pointer-events-none');
+            
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0', 'pointer-events-none');
+            }, 3000);
+        }
+
+        function toggleMobileNav() {
+            const nav = document.getElementById('mobile-nav');
+            nav.classList.toggle('hidden');
+        }
+    </script>
+</body>
+</html>
